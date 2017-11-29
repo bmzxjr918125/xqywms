@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="clientuserapi" namespace="/tmu/apiv1" extends="comclientlogin">
+		<!-- 关于用户端api接口action v1 -->
+		<action name="clientUserApi*" class="clientUserApiV1Action" method="{1}">
+			
+		    <result name="answer" type="json">
+				<param name="root">answer</param>
+                 <!--支持jsonp 跨域请求-->
+                 <param name="callbackParameter">callback</param>  
+                 <!-- <param name="noCache">true</param>   -->
+			</result>
+			
+		</action>
+	</package>
+	
+</struts>

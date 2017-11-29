@@ -1,0 +1,72 @@
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+
+    <description>自定义EL函数</description>
+    <tlib-version>1.0</tlib-version>
+    <short-name>elfunction</short-name>
+    <uri>/WEB-INF/elfunction.tld</uri>
+
+  <function>
+        <description>json中的时间转换为xx分钟前的格式</description>
+        <name>timeEx</name>
+        <function-class>llms.el.Functions</function-class>
+         <function-signature>java.lang.String timeEx( java.lang.Long )</function-signature>
+  </function>
+  <function>
+        <description>json中的时间转换为yyyy年mm月dd日</description>
+        <name>timeToChineseEx</name>
+        <function-class>llms.el.Functions</function-class>
+         <function-signature>java.lang.String timeToChineseEx( java.lang.Long )</function-signature>
+  </function>
+
+  <function>
+        <description>json中long型转为yyyy-MM-dd HH:mm</description>
+        <name>longEx</name>
+        <function-class>llms.el.Functions</function-class>
+         <function-signature>java.lang.String longEx( java.lang.Long )</function-signature>
+  </function>
+
+  <function>
+        <description>时间转换为"今天 10:00或昨天 01:00或2015-11-03 12:45"的格式</description>
+        <name>dateEx</name>
+        <function-class>llms.el.Functions</function-class>
+         <function-signature>java.lang.String dateEx( java.lang.Long )</function-signature>
+  </function>
+
+  <function>
+        <description>价格转换</description>
+        <name>getPrice</name>
+        <function-class>llms.el.Functions</function-class>
+        <function-signature>java.lang.String getPrice( java.lang.Double)</function-signature>
+  </function>
+
+  <function>
+        <description>价格转换为String</description>
+        <name>priceEx</name>
+        <function-class>llms.el.Functions</function-class>
+        <function-signature>java.lang.String priceEx( java.lang.Double)</function-signature>
+  </function>
+
+  <function>
+        <description>double转为int</description>
+        <name>scoreEx</name>
+        <function-class>llms.el.Functions</function-class>
+        <function-signature>java.lang.Integer scoreEx( java.lang.Double)</function-signature>
+  </function>
+  <function>
+        <description>int取绝对值</description>
+        <name>absEx</name>
+        <function-class>llms.el.Functions</function-class>
+        <function-signature>java.lang.Integer absEx( java.lang.Integer)</function-signature>
+  </function>
+
+    <function>
+        <description>将时间以秒为单位的数字转为时间格式字符串</description>
+        <name>formatTime</name>
+        <function-class>llms.el.Functions</function-class>
+        <function-signature>java.lang.String formatTime( java.lang.Integer)</function-signature>
+    </function>
+
+</taglib>

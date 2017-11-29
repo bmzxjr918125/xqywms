@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package namespace="/admin" name="admin" extends="comadmin">
+        <action name="admin*" class="adminAction" method="{1}">
+            <result name="Login">/WEB-INF/admin/Admin/adminLogin.jsp</result>
+            <result name="success" type="redirectAction">adminMenuShow</result>
+            <result name="MenuShow">/WEB-INF/admin/Admin/menuShow.jsp</result>
+            <result name="Logout" type="redirectAction">adminLogin</result>
+            <result name="Update">/WEB-INF/admin/Admin/adminUpdate.jsp</result>
+
+             <result name="UpdateError">/WEB-INF/admin/Admin/adminUpdate.jsp</result>
+             <result name="UpdateSave" type="redirectAction">
+               <param name="actionName">adminMenuShow</param>
+            </result>
+             <result name="AddSave" type="redirectAction">
+               <param name="actionName">adminShow</param>
+            </result>
+             <result name="EditSave" type="redirectAction">
+               <param name="actionName">adminShow</param>
+            </result>
+            <result name="Show">/WEB-INF/admin/Admin/adminShow.jsp</result>
+            <result name="Add">/WEB-INF/admin/Admin/adminAdd.jsp</result>
+            <result name="Edit">/WEB-INF/admin/Admin/adminEdit.jsp</result>
+            <result name="AjaxShow" type="json">
+                <param name="root">dtJson</param>
+            </result>
+            <result name="answer" type="json">
+				<param name="root">answer</param>
+			</result>
+        </action>
+    </package>
+</struts>

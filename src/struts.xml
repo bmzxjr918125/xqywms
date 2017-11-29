@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring"></constant>
+	<constant name="struts.configuration.xml.reload" value="false"></constant>
+	<constant name="struts.devMode" value="false"></constant>
+	<!--设定上传文件最大值是100M-->
+    <constant name="struts.multipart.maxSize"
+    value="1000000000000"/>
+    <!-- 设置浏览器是否缓存静态内容,默认值为true(生产环境下使用),开发阶段最好关闭 --> 
+    <constant name="struts.serve.static.browserCache" value="true"/> 
+     <!--访问后缀 api访问加上.do后缀 -->
+    <constant name="struts.action.extension" value="do,action,,"/>   
+    <constant name="struts.i18n.encoding" value="utf-8" /> 
+     <!--全局过滤器-->
+        <package name="default_interceptor" extends="json-default">
+          <interceptors>
+	           <interceptor name="logException"  class="com.util.interceptor.ExceptionInterceptor"/>
+	           <!-- 定义一个拦截器栈 -->
+	           <interceptor-stack name="logExceptionInterceptor">
+	              <interceptor-ref name="logException" />
+				  <interceptor-ref name="defaultStack" />
+	           </interceptor-stack>
+          </interceptors>
+          <default-interceptor-ref name="logExceptionInterceptor" />
+	      <!--默认action  -->
+		  <default-action-ref name="pageNotFund"></default-action-ref>
+		  <!-- 全局返回结果  -->
+		  <global-results>
+		        <!--后台admin登录拦截返回结果-->
+				<result name="adminLogin" type="redirectAction">adminLogin</result>
+		        <!--后台admin登录拦截返回结果-->
+				<result name="emplLogin" type="redirectAction">emplLogin</result>
+				<!--异常json统一返回结果-->
+				<result name="EXCEPTION_JSON" type="json">
+				   <param name="root">result</param>
+                     <!--支持jsonp 跨域请求-->
+                   <param name="callbackParameter">callback</param>  
+				</result>
+				<!--异常html统一返回结果-->
+				<result  name="EXCEPTION_HTML">/exception.jsp</result>
+			</global-results>
+        </package>
+        <!-- 后台拦截器 -->
+		<package name="comadmin" extends="default_interceptor">
+			<interceptors>
+			    <!--账户的拦截判断-->
+				<interceptor name="adminInterceptor" class="com.util.interceptor.AdminInterceptor">
+					<param name="excludeMethods">Login,Loginin</param>
+				</interceptor>
+				<interceptor-stack name="trademsAdminInterceptor">
+					<interceptor-ref name="adminInterceptor"/>
+					<interceptor-ref name="logException" />
+					<interceptor-ref name="defaultStack"/>
+				</interceptor-stack>
+			</interceptors>
+			<default-interceptor-ref name="trademsAdminInterceptor" />
+		</package>
+		
+		<!-- 客户端 已登录接口验证 -->
+        <package name="comclientlogin" extends="default_interceptor">
+            <interceptors>
+                <!--账户的拦截判断-->
+                <interceptor name="clientloginInterceptor" class="com.util.interceptor.ClientInterceptor">
+                   <!-- 全局exclude
+                    <param name="excludeMethods">SendCode,RegisterMember,ResetMemberPwd</param>
+                   -->
+                </interceptor>
+                <interceptor-stack name="ClientloginInterceptor">
+                    <interceptor-ref name="clientloginInterceptor" >
+                         <!--局部exclude
+                        <param name="excludeMethods">SendCode,RegisterMember,ResetMemberPwd</param>-->
+                        <!--自定义参数excludeActionName-->
+                        <param name="excludeMethods">Login,GetRegisterCode,Register,GetForgetCode,ValiForGetCode,UpdatePwd,GetNewList,GetNewInfo</param>
+                    </interceptor-ref>
+                    <interceptor-ref name="logException" />
+                    <interceptor-ref name="defaultStack"/>
+                </interceptor-stack>
+            </interceptors>
+            <default-interceptor-ref name="ClientloginInterceptor" />
+        </package>
+     
+     <include file="struts/Admin/*.xml" />
+      <!--前端User用户-->
+     <include file="struts/Api/User/*.xml" />
+
+</struts>
+

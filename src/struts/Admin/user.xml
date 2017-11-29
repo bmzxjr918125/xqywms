@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package namespace="/admin" name="user" extends="comadmin">
+        <action name="user*" class="userAction" method="{1}">
+            <result name="Show">/WEB-INF/admin/User/userShow.jsp</result>
+          
+            <result name="AjaxShow" type="json">
+                <param name="root">dtJson</param>
+            </result>
+            <result name="answer" type="json">
+				<param name="root">answer</param>
+			</result>
+        </action>
+    </package>
+</struts>
