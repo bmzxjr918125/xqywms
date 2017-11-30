@@ -1,6 +1,7 @@
 package com.service;
 
 
+import com.base.action.datatables.DataTables;
 import com.entity.project.ProjectUser;
 import com.entity.user.User;
 
@@ -31,6 +32,9 @@ public interface UserService {
 
 
     int countUserNumber(String format);
+
+
+    void getDataTablePage(DataTables dtJson, String nikeName, String phoneNumber);
 
 	
 }

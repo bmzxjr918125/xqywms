@@ -14,17 +14,35 @@ public class DeviceInfoVo implements Serializable {
      */
     private String deviceName;
     /**
-     * 供应商
+     * 供应商 设备厂家
      */
     private String supplier;
+    /**
+     * 设备型号
+     */
+    private String modelNum;
+    /**
+     * 制冷量/输入功率
+     */
+    private String input;
+    /**
+     * 制热量/输出功率
+     */
+    private String output;
+    /**
+     * 制冷剂类型
+     */
+    private String cryogenType;
+    /**
+     * 制冷剂充注量
+     */
+    private String charge;
     /**
      * 设备描述
      */
      private String description;
-     /**
-      * 设备型号
-      */
-     private String modelNum;
+    
+     
     public String getDeviceName() {
         return deviceName;
     }
@@ -49,17 +67,45 @@ public class DeviceInfoVo implements Serializable {
     public void setModelNum(String modelNum) {
         this.modelNum = modelNum;
     }
+    public String getInput() {
+        return input;
+    }
+    public void setInput(String input) {
+        this.input = input;
+    }
+    public String getOutput() {
+        return output;
+    }
+    public void setOutput(String output) {
+        this.output = output;
+    }
+    public String getCryogenType() {
+        return cryogenType;
+    }
+    public void setCryogenType(String cryogenType) {
+        this.cryogenType = cryogenType;
+    }
+    public String getCharge() {
+        return charge;
+    }
+    public void setCharge(String charge) {
+        this.charge = charge;
+    }
     
     private DeviceInfoVo() {
         super();
     }
-    private DeviceInfoVo(String deviceName, String supplier, String description,
-            String modelNum) {
+    private DeviceInfoVo(String deviceName, String supplier, String modelNum,
+            String input, String output, String cryogenType, String charge,
+            String description) {
         super();
         this.deviceName = deviceName;
         this.supplier = supplier;
-        this.description = description;
         this.modelNum = modelNum;
+        this.input = input;
+        this.output = output;
+        this.cryogenType = cryogenType;
+        this.charge = charge;
+        this.description = description;
     }
-     
 }

@@ -5,7 +5,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-	<title>驰骋家后台管理系统-新闻编辑</title>
+	<title>雪球能源运维后台管理系统-新闻编辑</title>
 	<script type="text/javascript" src="<%=basePath%>ueditor/ueditor.config.js"></script>
 	<script type="text/javascript" src="<%=basePath%>ueditor/ueditor.all.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>ueditor/lang/zh-cn/zh-cn.js"></script>

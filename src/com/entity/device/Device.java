@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.Parameter;
@@ -31,7 +32,6 @@ public class Device implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-   
     
     /**
      * 设备通用信息
@@ -44,7 +44,6 @@ public class Device implements Serializable {
         @AttributeOverride(name = "address", column = @Column( name = "address"))
     })*/
     private DeviceInfoVo deviceInfo;
-    
     /**
      * 设备状态
      */
@@ -56,7 +55,10 @@ public class Device implements Serializable {
      */
     @Column(unique = true, nullable = false, length = 30)
     private String deviceNo;
-    
+    /**
+     * 出厂日期
+     */
+    private String productionDate;
     /**
      * 购买日期
      */
@@ -70,6 +72,8 @@ public class Device implements Serializable {
     /**
      * 添加管理员
      */
+    @ManyToOne
+    @JoinColumn(name="adminId",nullable = false)
     private Admin admin;
     /**
      * 创建日期
@@ -81,6 +85,10 @@ public class Device implements Serializable {
      */
     @Column(nullable = false , columnDefinition = "TIMESTAMP default CURRENT_TIMESTAMP")
     private Date updateDate;
+    /**
+     * 其它描述
+     */
+    private String otherDesc;
     
     public Integer getId() {
         return id;
@@ -151,6 +159,22 @@ public class Device implements Serializable {
 
     public void setDeviceInfo(DeviceInfoVo deviceInfo) {
         this.deviceInfo = deviceInfo;
+    }
+
+    public String getProductionDate() {
+        return productionDate;
+    }
+
+    public void setProductionDate(String productionDate) {
+        this.productionDate = productionDate;
+    }
+
+    public String getOtherDesc() {
+        return otherDesc;
+    }
+
+    public void setOtherDesc(String otherDesc) {
+        this.otherDesc = otherDesc;
     }
     
 }

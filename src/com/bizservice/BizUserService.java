@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONObject;
 
+import com.base.action.datatables.DataTables;
 import com.entity.project.ProjectUser;
 import com.entity.user.User;
 
@@ -44,12 +45,6 @@ public interface BizUserService {
             String province, String city, String area, String address);
     void isRegister(String phoneNumber);
     void updatePwd(String newPwd, String newPwdAgin, String phoneNumber);
-  
-   
-  
-  
     
-    
-	
-
+    void getDataTablePage(DataTables dtJson, String nikeName, String phoneNumber);
 }

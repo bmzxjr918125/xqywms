@@ -40,9 +40,9 @@ public class ProjectDeviceCheckDetails implements Serializable {
 	private ProjectWorker projectWorker;
 	/**
      * 巡检结果 jsonArray字符串
-     * [{"name":"是否运行正常","value":true},
-     *  {"name":"是否制冷正常","value":true},
-     *  {"name":"是否运行正常","value":false}]
+     * [{"id":1,"name":"是否运行正常","value":true,"desc":""},
+     *  {"id":2,"name":"是否制冷正常","value":true,"desc":""},
+     *  {"id":3,"name":"是否运行正常","value":false,"desc":""}]
      *  LongText
      */
     @Column(length = 16777216)

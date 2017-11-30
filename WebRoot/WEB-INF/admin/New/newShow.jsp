@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>驰骋家后台管理系统-新闻列表</title>
+<title>雪球能源运维后台管理系统-新闻列表</title>
 </head>
 
 <body class="withvernav">

@@ -60,10 +60,10 @@
             <li><a href="#keywordsul" class="gallery">词条管理</a>
                 <span class="arrow"></span>
                 <ul id="keywordsul">
-                    <li id="keywordsli1" class="power_311"><a href="admin/userShow">巡检词条</a></li>
-                    <li id="keywordsli2" class="power_312"><a href="admin/userShow">维修词条</a></li>
-                    <li id="keywordsli3" class="power_313"><a href="admin/userShow">部门词条</a></li>
-                    <li id="keywordsli4" class="power_314"><a href="admin/userShow">职位词条</a></li>
+                    <li id="keywordsli1" class="power_311"><a href="admin/entryShow?flag=1">巡检词条</a></li>
+                    <li id="keywordsli2" class="power_312"><a href="admin/entryShow?flag=2">维修词条</a></li>
+                    <li id="keywordsli3" class="power_313"><a href="admin/entryShow?flag=3">部门词条</a></li>
+                    <li id="keywordsli4" class="power_314"><a href="admin/entryShow?flag=4">职位词条</a></li>
                 </ul>
             </li>
         </ul>

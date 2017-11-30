@@ -76,6 +76,11 @@ public class User implements Serializable {
     @OneToOne
     @JoinColumn(nullable = false , name = "projectUserId")
 	private ProjectUser projectUser;
+    /**
+     * 提交维修次数
+     */
+    @Column(nullable = false , columnDefinition = "INT default 0")
+    private int commitCheckNum;
 	/**
 	 * 用户地址
 	 */
@@ -159,6 +164,12 @@ public class User implements Serializable {
     }
     public void setProjectUser(ProjectUser projectUser) {
         this.projectUser = projectUser;
+    }
+    public int getCommitCheckNum() {
+        return commitCheckNum;
+    }
+    public void setCommitCheckNum(int commitCheckNum) {
+        this.commitCheckNum = commitCheckNum;
     }
     
     /**

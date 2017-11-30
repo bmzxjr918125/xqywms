@@ -32,6 +32,14 @@ public interface BizCommonService {
             String content, String deleteylIds, List<File> ylfile);
 
     List<Image> getImageByNameAndVal(String name, int value);
+
+    void getEntryDataTablePage(DataTables dtJson, int flag);
+
+    void addSaveEntry(String name, int flag);
+
+    void updateSaveEntry(int id, String name);
+
+    void deleteEntryByIds(String ids);
    
 
 }

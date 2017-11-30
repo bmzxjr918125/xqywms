@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ import org.hibernate.annotations.Type;
 import com.entity.common.Image;
 import com.entity.enumobj.LogoDefaultEnum;
 import com.entity.enumobj.Status;
+import com.entity.vo.CountVo;
 import com.util.Md5Utils;
 
 /**
@@ -88,6 +90,11 @@ public class Worker implements Serializable {
 	 */
 	@Column(nullable = false , columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP")
 	private Date updateDate;
+	 /**
+     * 统计数据
+     */
+    @Embedded
+    private CountVo count;
 
 	public Integer getId() {
 		return id;
@@ -163,6 +170,12 @@ public class Worker implements Serializable {
     public void setStatus(Status status) {
         this.status = status;
     }
+    public CountVo getCount() {
+        return count;
+    }
+    public void setCount(CountVo count) {
+        this.count = count;
+    }
     
     
     /**
@@ -204,4 +217,5 @@ public class Worker implements Serializable {
         this.status = Status.WORKER_ABLE;
         
     }
+    
 }

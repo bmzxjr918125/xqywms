@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 
+import com.base.action.datatables.DataTables;
 import com.dao.UserDao;
 import com.entity.project.ProjectUser;
 import com.entity.user.User;
@@ -26,7 +27,9 @@ public class UserServiceImpl implements UserService{
 			userDao.update(user);
 			
 		}		
-
+		 public void getDataTablePage(DataTables dtJson, String nikeName, String phoneNumber) {
+		     userDao.getDataTablePage(dtJson,nikeName,phoneNumber);
+	     }
 	
         
         public User getById(Integer userId) {

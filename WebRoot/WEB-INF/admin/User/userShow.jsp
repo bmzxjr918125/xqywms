@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>驰骋家后台管理系统-会员列表</title>
+<title>雪球能源运维后台管理系统-客户列表</title>
 </head>
 
 <body class="withvernav">
@@ -16,12 +16,12 @@
     <div class="centercontent tables">
         <div id="contentwrapper" class="contentwrapper">
             <div class="contenttitle2">
-                    <h3>会员列表</h3>
+                    <h3>客户列表</h3>
             </div>
             <div class="tableoptions" style="float: right;">
                  <div style="display: inline-block;">
                             <form class="stdform stdform2">
-                                        <span style="margin-left: 10px;">会员昵称：
+                                        <span style="margin-left: 10px;">会员名称：
                                             <span style="display: inline-block;"> 
                                                 <input id="nickName" type="text" style="width: 200px;" maxlength="20"/>
                                             </span>
@@ -31,27 +31,6 @@
                                                 <input id="phoneNumber" type="text" style="width: 200px;" class="data-number" maxlength="11"/>
                                             </span>
                                         </span>
-                                        <span style="font-size: 14px;margin-left: 10px;">是否认证：
-                                           <span style="display: inline-block;">
-                                            <select name="authen" id="authen" class="radius3" style="font-size: 12px;min-width: 15%;">
-                                                <option value="0"  selected="selected">--全部--</option>
-                                                <option value="1">--未认证--</option>
-                                                <option value="2">--认证中--</option>
-                                                <option value="3">--已认证--</option>
-                                                <option value="4">--认证未通过--</option>
-                                            </select>
-                                           </span>
-                                        </span> 
-                                        <span style="font-size: 14px;margin-left: 10px;">会员等级：
-                                           <span style="display: inline-block;">
-                                            <select name="grade" id="grade" class="radius3" style="font-size: 12px;min-width: 15%;">
-                                                <option value="0"  selected="selected">--全部会员--</option>
-                                                <option value="1">--普通会员--</option>
-                                                <option value="2">--金卡会员--</option>
-                                                <option value="3">--钻石会员--</option>
-                                            </select>
-                                           </span>
-                                        </span> 
                                         <a id="query_button" class="query_button btn btn_orange btn_search radius120" style="margin-left: 10px;cursor:pointer;">
                                             <span>查询</span>
                                         </a>
@@ -62,16 +41,12 @@
                 <thead>
                     <tr>
                         <th class="head1 nosort"><input type="checkbox" class="checkall"/></th>
-                        <th class="head1">头像</th>
-                        <th class="head1">账号</th>
-                        <th class="head1">昵称</th>
-                        <th class="head1">推荐码</th>
-                        <th class="head1">被推荐码</th>
-                        <th class="head1">积分</th>
-                        <th class="head1">等级</th>
-                        <th class="head1">认证</th>
-                        <th class="head1">创建时间</th>
+                        <th class="head1">名称</th>
+                        <th class="head1">联系方式</th>
+                        <th class="head1">所属项目</th>
+                        <th class="head1">提交维修次数</th>
                         <th class="head1">最近登录时间</th>
+                        <th class="head1">主负责人</th>
                         <th class="head1">操作</th>
                     </tr>
                 </thead>
@@ -105,53 +80,19 @@ jQuery(document).ready(function(){
             'className':'center'
         },
         //{'data':'id','orderable':false},
-        {
-                "data" : "headerImg.imageUrl",
-                "className" : "center",
-                "orderable":false,
-                "render" : function(data, type, full) {
-                    var content="";
-                    content= "<img width='80px' height='80px' src=<%=imagePath%>"+data+" />";
-                  return content;
-                }
-            },
-        {'data':'phoneNumber','orderable':false,'className':'center'},
         {'data':'nickName','orderable':false,'className':'center'},
-        {'data':'myCode','orderable':false,'className':'center'},
-        {'data':'higherCode','orderable':false,'className':'center'},
-        {'data':'account.integral','orderable':true,'className':'center'},
+        {'data':'phoneNumber','orderable':false,'className':'center'},
         {
-            "data" : "grade",
+            "data" : null,
             "className" : "center",
             "orderable":false,
             "render" : function(data, type, full) {
-              return grade(data);
+              return full.projectUser.project.projectName;
             }
         },
+        {'data':'commitCheckNum','orderable':true,'className':'center'},
         {
-            "data" : "userCheck",
-            "className" : "center",
-            "orderable":false,
-            "render" : function(data, type, full) {
-                var content="----";
-                if(data == null){
-                    content="<span style='color:red;'>未认证</span>";
-                }else{
-                    content=authen(data,full.phoneNumber);
-                }
-              return content;
-            }
-        },
-        {
-            'data':'createDate',
-            'render':function(data,type,full){
-                return data != null ? data.replace(/\T/g,' ') : "-.-.-";
-            },
-            'orderable':true,
-            'className':'center'
-        },
-        {
-            'data':'thisLoginDate',
+            'data':'lastLoginDate',
             'render':function(data,type,full){
                 return data != null ? data.replace(/\T/g,' ') : "-.-.-";
             },
@@ -161,8 +102,23 @@ jQuery(document).ready(function(){
         {
             'data':null,
             'render':function(data,type,full){
+                if(full.projectUser.isMain == "YES"){
+                    return "<span style='color:#78ce07'>是</span>";
+                }else{
+                    return "<span>否</span>";
+                }
+            },
+            'orderable':false,
+            'className':'center'
+        },
+        {
+            'data':null,
+            'render':function(data,type,full){
                 var content="";
-                content+="<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='UpdateIntegral("+JSON.stringify(full)+")'>增加积分</a>";
+                content+="<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='sendMSM("+JSON.stringify(full)+")'>发送短信</a>";
+                if(full.projectUser.isMain == "YES"){
+                    content+="&nbsp;&nbsp<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='lookUser("+full.projectUser.project.id+")'>查看下属人员</a>";
+                }
                 return content;
             },
             'orderable':false,
@@ -180,30 +136,31 @@ jQuery(document).ready(function(){
 jQuery("#query_button").click(function() {
     reqData["nickName"] = jQuery("#nickName").val();
     reqData["phoneNumber"] = jQuery("#phoneNumber").val();
-    reqData["grade"] = jQuery("#grade").val();
-    reqData["authen"] = jQuery("#authen").val();
+    
     oTable.fnDraw();
 });
    /**
-    *添加店员账号
+    *发送短信给客户
     */
-  function UpdateIntegral(obj){
+  function sendMSM(obj){
 
-        var html = "用户手机：<input class='popup_prompt' maxlength='11'  value='"+obj.phoneNumber+"' disabled=true/><br/>";
-            html+="用户昵称：<input class='popup_prompt' maxlength='10' value='"+obj.nickName+"' disabled=true /><br/>";
-            html+="增加积分：<input class='popup_prompt data-number' maxlength='10' id='integralNum' placeholder='请输入增加积分数量'/><span style='color:red;'> *</span><br/>";
-        jBmzAlert( html, "增加会员积分", function(r) {
+        var html = "用户手机："+obj.phoneNumber+"<br/>";
+            html+="短息内容：<br/><textarea class='popup_prompt' maxlength='40'  value='"+obj.phoneNumber+"' id='content'></textarea><br/>";
+            html+="<span style='color:red;'> *短信字数不能超过100字</span><br/>";
+        jBmzAlert( html, "发送短信给用户  "+obj.nickName, function(r) {
             if (r) {
-                var integralNum = jQuery("#integralNum").val();
+                var content = jQuery("#content").val();
                 
-                if (integralNum == null || integralNum.trim() == "") {
-                    jAlertErrorMsg("请输入增加积分数量");
+                if (content == null || content.trim() == "") {
+                    jAlertErrorMsg("请输入短信内容");
                     return false;
                 } 
                 var reData={};
-                reData["integralNum"]=integralNum;
+                reData["content"]=content;
+                reData["phoneNumber"]=obj.phoneNumber;
+                reData["userId"]=obj.id;
                 
-                    var url = "admin/userAddSaveIntegral?userId="+obj.id;
+                    var url = "admin/userSendMSM";
                     jQuery.axse(
                         url,
                         reData,
@@ -222,6 +179,83 @@ jQuery("#query_button").click(function() {
             }
         });
   }
+   
+  /**
+   *查看关联客户
+   */
+  function lookUser(projectId) {
+
+      var html = "<table cellpadding='0' cellspacing='0' border='0' class='stdtable stdtablecb' id='MeAjaxShow_Table'>"
+              + "<thead>"
+              + "<tr>"
+              + "<th class='head1'>名称</th>"
+              + "<th class='head1'>联系方式</th>"
+              + "<th class='head1'>提交维修次数</th>"
+              + "<th class='head1'>最近登录时间</th>"
+              + "<th class='head1'>主负责人</th>"
+              + "<th class='head1'>操作</th>"
+              + "</tr>" + "</thead>" + "<tbody>" + "</tbody>" + "</table>";
+      jBmzAlert(html, "下属人员", function(r) {
+      });
+      jQuery("#popup_ok").css("display", "none");
+      jQuery("#popup_container").css("min-width", "800px");
+      jQuery("#popup_cancel").val("关闭");
+      getMeData(projectId);
+  }
+  var mereqData = {};
+  var meTable = null;
+  function getMeData(projectId) {
+
+      var table = jQuery("#MeAjaxShow_Table");
+
+      var columns = [
+                     //{'data':'id','orderable':false},
+                     {'data':'user.nickName','orderable':false,'className':'center'},
+                     {'data':'user.phoneNumber','orderable':false,'className':'center'},
+                     {'data':'user.commitCheckNum','orderable':true,'className':'center'},
+                     {
+                         'data':'user.lastLoginDate',
+                         'render':function(data,type,full){
+                             return data != null ? data.replace(/\T/g,' ') : "-.-.-";
+                         },
+                         'orderable':true,
+                         'className':'center'
+                     },{
+                         'data':'isMain',
+                         'render':function(data,type,full){
+                             if(data == "YES"){
+                                 return "<span style='color:#78ce07'>是</span>";
+                             }else{
+                                 return "<span>否</span>";
+                             }
+                         },
+                         'orderable':false,
+                         'className':'center'
+                     },
+                     {
+                         'data':null,
+                         'render':function(data,type,full){
+                             var content="";
+                             content+="<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='sendMSM("+JSON.stringify(full)+")'>发送短信</a>";
+                             return content;
+                         },
+                         'orderable':false,
+                         'className':'center'
+                     }
+                 ];
+
+                
+      var order = [ [ 4, "desc" ] ];//,[9,"desc"]
+      var options = {
+          "dom" : "rt<'table_bottom'lip><'clear'>"
+      };
+
+      meTable = DataTablePack.serverTable(table,
+              "admin/userUnderAjaxShow?projectId=" +projectId , mereqData,
+              columns, order, options);
+
+  }
+   
 
 </script>
 

@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import com.entity.user.User;
@@ -48,7 +47,7 @@ public class ProjectUser implements Serializable {
      */
      @Type(type = "com.entity.enumobj.base.IntegerValuedEnumType",
                 parameters = {@Parameter(name = "enum" , value = "com.entity.enumobj.Boolean")})
-    private Boolean isMain;
+    private com.entity.enumobj.Boolean isMain;
     
     public Integer getId() {
         return id;
@@ -68,16 +67,17 @@ public class ProjectUser implements Serializable {
     public void setProject(Project project) {
         this.project = project;
     }
-    public Boolean getIsMain() {
-        return isMain;
-    }
-    public void setIsMain(Boolean isMain) {
-        this.isMain = isMain;
-    }
+   
     public User getUser() {
         return user;
     }
     public void setUser(User user) {
         this.user = user;
+    }
+    public com.entity.enumobj.Boolean getIsMain() {
+        return isMain;
+    }
+    public void setIsMain(com.entity.enumobj.Boolean isMain) {
+        this.isMain = isMain;
     }
 }

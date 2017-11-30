@@ -6,12 +6,16 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
+
+import com.base.action.datatables.DataTables;
 import com.bizservice.BizUserService;
 import com.entity.project.ProjectUser;
 import com.entity.user.User;
 import com.entity.vo.AddressVo;
 import com.exception.BizException;
 import com.service.ImageService;
+import com.service.ProjectService;
+import com.service.ProjectUserService;
 import com.service.UserService;
 import com.util.Md5Utils;
 
@@ -20,8 +24,10 @@ import com.util.Md5Utils;
 public class BizUserServiceImpl implements BizUserService{
     private UserService userService;
     private ImageService imageService;
+    private ProjectService projectService;
+    private ProjectUserService projectUserService;
    
-   
+    
   
     
     public JSONObject login(HttpServletRequest request,String phoneNumber, String pwd) {
@@ -171,7 +177,9 @@ public class BizUserServiceImpl implements BizUserService{
         
     }
    
-   
+    public void getDataTablePage(DataTables dtJson, String nikeName, String phoneNumber) {
+       userService.getDataTablePage(dtJson,nikeName,phoneNumber);
+    }
    
   
     public UserService getUserService() {
@@ -188,5 +196,19 @@ public class BizUserServiceImpl implements BizUserService{
     @Resource(name="imageService")
     public void setImageService(ImageService imageService) {
         this.imageService = imageService;
+    }
+    public ProjectService getProjectService() {
+        return projectService;
+    }
+    @Resource(name="projectService")
+    public void setProjectService(ProjectService projectService) {
+        this.projectService = projectService;
+    }
+    public ProjectUserService getProjectUserService() {
+        return projectUserService;
+    }
+    @Resource(name="projectUserService")
+    public void setProjectUserService(ProjectUserService projectUserService) {
+        this.projectUserService = projectUserService;
     }
 }

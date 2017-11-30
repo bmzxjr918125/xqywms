@@ -17,12 +17,15 @@ import org.springframework.stereotype.Service;
 import com.base.action.datatables.DataTables;
 import com.bizservice.BizCommonService;
 import com.config.GeneralConfig;
+import com.entity.common.Entry;
 import com.entity.common.Image;
 import com.entity.common.New;
+import com.entity.enumobj.EntryType;
 import com.entity.enumobj.ImageType;
 import com.exception.BizException;
 import com.service.AreaService;
 import com.service.CityService;
+import com.service.EntryService;
 import com.service.ImageService;
 import com.service.NewService;
 import com.service.ProvinceService;
@@ -37,6 +40,7 @@ public class BizCommonServiceImpl implements BizCommonService{
     private AreaService areaService;
     private NewService newService;
     private ImageService imageService;
+    private EntryService entryService;
     
     
     
@@ -190,6 +194,59 @@ public class BizCommonServiceImpl implements BizCommonService{
         return imageService.getImageList(name, value, ImageType.XQ_NEW_IMG);
     }
 
+    public void getEntryDataTablePage(DataTables dtJson,int flag) {
+       
+        entryService.getEntryDataTablePage(dtJson,flag);
+    }
+
+    public void addSaveEntry(String name, int flag) {
+        if(name == null || name.trim().equals("")){
+            throw new BizException("请填写词条名称");
+        }
+        
+        Entry entry = new Entry();
+        
+        entry.setValue(name);
+        entry.setEntryType(EntryType.getByIndex(flag));
+        entry.setCreateDate(new Date());
+        entryService.save(entry);
+    }
+
+
+    public void updateSaveEntry(int id, String name) {
+        if(name == null || name.trim().equals("")){
+            throw new BizException("请填写词条名称");
+        }
+        Entry entry = entryService.getById(id);
+        
+        if(entry == null){
+            throw new BizException("未找到词条对应信息");
+        }
+        
+        entry.setValue(name);
+        
+        entryService.update(entry);
+        
+    }
+
+
+    public void deleteEntryByIds(String ids) {
+        if(ids == null || ids.trim().equals("")){
+            throw new BizException("请选择要删除得词条");
+        }
+        String id[] = ids.split(",");
+        for(int i=0;i<id.length;i++){
+            Entry entry = entryService.getById(Integer.parseInt(id[i]));
+            if(entry == null){
+                throw new BizException("未找到词条对应信息");
+            }
+            entryService.delete(entry);
+        }
+    }
+    
+    
+    
+    
     
     public ProvinceService getProvinceService() {
         return provinceService;
@@ -226,6 +283,12 @@ public class BizCommonServiceImpl implements BizCommonService{
     public void setImageService(ImageService imageService) {
         this.imageService = imageService;
     }
-
+    public EntryService getEntryService() {
+        return entryService;
+    }
+    @Resource(name="entryService")
+    public void setEntryService(EntryService entryService) {
+        this.entryService = entryService;
+    }
 
 }

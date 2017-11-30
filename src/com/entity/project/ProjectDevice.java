@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,10 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import net.sf.json.JSONArray;
-
 import com.entity.device.Device;
+import com.entity.vo.CountVo;
 /**
  * <p>ClassName: ProjectDevice</p>
  * <p>@Description: 项目对应设备</p>
@@ -51,24 +51,10 @@ public class ProjectDevice implements Serializable {
      */
     private String position;
     /**
-     * 维修次数
+     * 统计数据
      */
-	@Column(nullable = false , columnDefinition = "INT default 0")
-    private int repairNum;
-    /**
-     * 巡检次数
-     */
-	@Column(nullable = false , columnDefinition = "INT default 0")
-    private int checkNum;
-    /**
-     * 最近巡检日期
-     */
-    private Date lastCheckDate;
-    /**
-     * 最近维修日期
-     */
-    @Column(nullable = true)
-    private Date lastRepairDate;
+    @Embedded
+    private CountVo count;
 	/**
 	 * 安装日期
 	 */
@@ -76,9 +62,9 @@ public class ProjectDevice implements Serializable {
 	private Date createDate;
     /**
      * 巡检词条 jsonArray字符串
-     * [{"name":"是否运行正常"},
-     *  {"name":"是否制冷正常"},
-     *  {"name":"是否运行正常"}]
+     * [{"id":1,"name":"是否运行正常","desc":""},
+     *  {"id":2,"name":"是否制冷正常","desc":""},
+     *  {"id":3,"name":"是否运行正常","desc":""}]
      *  LongText
      */
     @Column(length = 16777216)
@@ -114,41 +100,25 @@ public class ProjectDevice implements Serializable {
     public void setInstallWorker(String installWorker) {
         this.installWorker = installWorker;
     }
-    public int getCheckNum() {
-        return checkNum;
-    }
-    public void setCheckNum(int checkNum) {
-        this.checkNum = checkNum;
-    }
+   
     public String getPosition() {
         return position;
     }
     public void setPosition(String position) {
         this.position = position;
     }
-    public int getRepairNum() {
-        return repairNum;
-    }
-    public void setRepairNum(int repairNum) {
-        this.repairNum = repairNum;
-    }
-    public Date getLastCheckDate() {
-        return lastCheckDate;
-    }
-    public void setLastCheckDate(Date lastCheckDate) {
-        this.lastCheckDate = lastCheckDate;
-    }
-    public Date getLastRepairDate() {
-        return lastRepairDate;
-    }
-    public void setLastRepairDate(Date lastRepairDate) {
-        this.lastRepairDate = lastRepairDate;
-    }
+ 
     public String getCheckEntryJa() {
         return checkEntryJa;
     }
     public void setCheckEntryJa(String checkEntryJa) {
         this.checkEntryJa = checkEntryJa;
+    }
+    public CountVo getCount() {
+        return count;
+    }
+    public void setCount(CountVo count) {
+        this.count = count;
     }
     /**
      * <p>@Description: 获取巡检词条的JSONArray数据</p>

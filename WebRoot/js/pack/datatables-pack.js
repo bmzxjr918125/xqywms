@@ -96,19 +96,18 @@ var DataTablePack = function(){
 							type:'post',
 							url:href,
 							success:function(notify,textStatus){
-								if(notify.code == "1"){
-							  		 jQuery.jGrowl(notify.msg,{position:"center",theme:"jGrowlSuccess"});
-								}else if(notify.code == "2"){
-							   		 jQuery.jGrowl(notify.msg,{sticky: true,position:"center",theme:"jGrowlErorr"});
-								}else{
-							   		 jQuery.jGrowl(notify.msg,{sticky: true,position:"center",theme:"jGrowlWarning"});
-								}
-
-								//刷新表格数据
-								oTable.fnDraw(false);
-								//将全选标志设置false
-								table.find('.checkall').attr('checked',false);
-								table.find('.checkall').parent().removeClass('checked');
+							    if (notify.response == "success") {
+		                               jAlertSuccessMsg(notify.msg);
+		                               jAlertHide();
+		                               oTable.fnDraw();
+		                                //刷新表格数据
+		                                oTable.fnDraw(false);
+		                                //将全选标志设置false
+		                                table.find('.checkall').attr('checked',false);
+		                                table.find('.checkall').parent().removeClass('checked');
+		                           } else {
+		                               jAlertErrorMsg(notify.msg);
+		                           }
 							},
 							error:function(XMLHttpRequest,textStatus,errorThrown){
 								alert('请求异常');

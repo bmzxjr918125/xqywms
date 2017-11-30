@@ -1,6 +1,7 @@
 package com.dao;
 
 
+import com.base.action.datatables.DataTables;
 import com.base.dao.BaseDao;
 import com.entity.user.User;
 
@@ -19,5 +20,7 @@ public interface UserDao extends BaseDao<User>{
   
     String getNextCode();
     int countUserNumber(String formatDate);
+
+    void getDataTablePage(DataTables dtJson, String nikeName, String phoneNumber);
 
 }
