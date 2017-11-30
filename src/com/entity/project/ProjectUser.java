@@ -48,7 +48,6 @@ public class ProjectUser implements Serializable {
      @Type(type = "com.entity.enumobj.base.IntegerValuedEnumType",
                 parameters = {@Parameter(name = "enum" , value = "com.entity.enumobj.Boolean")})
     private com.entity.enumobj.Boolean isMain;
-    
     public Integer getId() {
         return id;
     }
