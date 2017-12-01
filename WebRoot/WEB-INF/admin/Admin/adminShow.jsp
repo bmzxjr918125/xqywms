@@ -16,7 +16,7 @@
     <div class="centercontent tables">
         <div id="contentwrapper" class="contentwrapper">
 			<div class="tableoptions">
-				<a class="btn btn2 btn_book" href="admin/adminAdd"><span>新增管理员</span></a>
+				<a class="btn btn_book" href="admin/adminAdd"><span>新增管理员</span></a>
 			</div>
 			<table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablecb" id="adminAjaxShow_Table">
 				<thead>

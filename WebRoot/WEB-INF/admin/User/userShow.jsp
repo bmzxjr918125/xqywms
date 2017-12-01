@@ -92,7 +92,7 @@ jQuery(document).ready(function(){
         },
         {'data':'commitCheckNum','orderable':true,'className':'center'},
         {
-            'data':'lastLoginDate',
+            'data':'thisLoginDate',
             'render':function(data,type,full){
                 return data != null ? data.replace(/\T/g,' ') : "-.-.-";
             },
@@ -214,7 +214,7 @@ jQuery("#query_button").click(function() {
                      {'data':'user.phoneNumber','orderable':false,'className':'center'},
                      {'data':'user.commitCheckNum','orderable':true,'className':'center'},
                      {
-                         'data':'user.lastLoginDate',
+                         'data':'user.thisLoginDate',
                          'render':function(data,type,full){
                              return data != null ? data.replace(/\T/g,' ') : "-.-.-";
                          },

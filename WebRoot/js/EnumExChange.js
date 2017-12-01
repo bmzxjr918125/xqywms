@@ -39,24 +39,51 @@ function grade(data){
   */
  function status(data){
      
-     if(data == "AUTHEN_WAIT_CHECK"){
+     if(data == "REPAIR_WAIT_ASK"){
         
-         return "<span style='color:#f6e4a5;'>待审核</span>";
-     }else if(data == "AUTHEN_PASS"){
+         return "<span title='用户或系统提交维修申请'>待派单</span>";
+     }else if(data == "REPAIR_SEND"){
          
-         return "<span style='color:#78ce07'>已通过</span>";
-     }else if(data == "AUTHEN_NOT_PASS"){
+         return "<span title='系统派单，待人员响应'>待响应</span>";
+     }else if(data == "REPAIR_ACCEPT"){
 
-         return "<span style='color:#fb9337'>未通过</span>";
-     }else if(data == "GRADE_WAIT_CHECK"){
+         return "<span title='工作人员接受工单，正在维修中'>维修中</span>";
+     }else if(data == "REPAIR_WAIT_CHECK"){
         
-         return "<span style='color:#f6e4a5;'>待审核</span>";
-     }else if(data == "GRADE_PASS"){
+         return "<span title='工作人员完成订单提交后台等待审核'>待审核</span>";
+     }else if(data == "REPAIR_FINISH"){
          
-         return "<span style='color:#78ce07'>已通过</span>";
-     }else if(data == "GRADE_NOT_PASS"){
+         return "<span title='后台审核通过订单已完成'>已通过</span>";
+     }else if(data == "REPAIR_SEND_FAIL"){
+         
+         return "<span title='工作人员拒绝接受派单，等待重新派单'>重新派单</span>";
+     }else if(data == "REPAIR_CHECK_FAIL"){
 
-         return "<span style='color:#fb9337'>未通过</span>";
+         return "<span title='订单完成审核不通过，返回维修状态'>重维修中</span>";
+     }else if(data == "REPAIR_FAIL"){
+
+         return "<span title='系统直接取消工单，等待重新派单状态'>重新派单</span>";
+     }else if(data == "WORKER_ABLE"){
+
+         return "<span style='color:#78ce07;'>正常</span>";
+     }else if(data == "WORKER_DISABLE"){
+
+         return "<span style='color:red;'>冻结</span>";
+     }else if(data == "USER_ABLE"){
+
+         return "<span style='color:#78ce07;'>正常</span>";
+     }else if(data == "USER_DISABLE"){
+
+         return "<span style='color:red;'>冻结</span>";
+     }else if(data == "DEVICE_NORMAL"){
+
+         return "<span style='color:#78ce07;'>正常</span>";
+     }else if(data == "DEVICE_REPAIR_ASK"){
+
+         return "<span style='color:#fb9337;'>报修中</span>";
+     }else if(data == "DEVICE_REPAIRING"){
+
+         return "<span style='color:#f6e4a5;'>维修中</span>";
      }
  }
  

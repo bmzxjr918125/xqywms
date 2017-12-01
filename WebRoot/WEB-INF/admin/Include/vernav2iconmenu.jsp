@@ -23,13 +23,13 @@
             <li><a href="#userul" class="gallery">客户管理</a>
                 <span class="arrow"></span>
                 <ul id="userul">
-                    <li id="userli1" class="power_121"><a href="admin/userShow">会员列表</a></li>
+                    <li id="userli1" class="power_121"><a href="admin/userShow">客户列表</a></li>
                 </ul>
             </li>
              <li><a href="#workerul" class="gallery">人员管理</a>
                 <span class="arrow"></span>
                 <ul id="workerul">
-                    <li id="workerli1" class="power_131"><a href="admin/userShow">会员列表</a></li>
+                    <li id="workerli1" class="power_131"><a href="admin/workerShow">人员列表</a></li>
                 </ul>
             </li>
              <li><a href="#newsul" class="gallery">新闻管理</a>

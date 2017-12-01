@@ -72,6 +72,25 @@ public interface BizWorkerService {
             String job);
     void isRegister(String phoneNumber);
     void updatePwd(String newPwd, String newPwdAgin, String phoneNumber);
+    /**
+     * <p>@Description: 冻结或启用账号</p>
+     * <p>@param @param workerId
+     * <p>@param @param flag</p>   
+     * <p>@return void</p> 
+     * <p>@throws</p>
+     * <p>@author BianMingZhou</p>
+     * <p>@date 2017-12-1下午3:11:19</p>
+     */
+    void ChangeStatus(int workerId, int flag);
+    /**
+     * <p>@Description: 重置用户密码为默认手机后六位</p>
+     * <p>@param @param workerId</p>   
+     * <p>@return void</p> 
+     * <p>@throws</p>
+     * <p>@author BianMingZhou</p>
+     * <p>@date 2017-12-1下午3:15:31</p>
+     */
+    void UpdateDefaultPwd(int workerId);
   
    
   

@@ -31,8 +31,8 @@ public class ProjectWorker implements Serializable {
      * 对应项目
      */
     @ManyToOne
-    @JoinColumn(name="projectId",nullable=false)
-    private Project project;
+    @JoinColumn(name="projectDeviceId",nullable=false)
+    private ProjectDevice projectDeviceId;
     /**
      * 对应工作人员
      */
@@ -62,12 +62,6 @@ public class ProjectWorker implements Serializable {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-    public Project getProject() {
-        return project;
-    }
-    public void setProject(Project project) {
-        this.project = project;
-    }
     public Worker getWorker() {
         return worker;
     }
@@ -79,5 +73,11 @@ public class ProjectWorker implements Serializable {
     }
     public void setWorkerType(WorkerType workerType) {
         this.workerType = workerType;
+    }
+    public ProjectDevice getProjectDeviceId() {
+        return projectDeviceId;
+    }
+    public void setProjectDeviceId(ProjectDevice projectDeviceId) {
+        this.projectDeviceId = projectDeviceId;
     }
 }

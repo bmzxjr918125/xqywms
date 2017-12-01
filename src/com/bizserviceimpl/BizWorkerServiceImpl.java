@@ -9,6 +9,7 @@ import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
 import com.base.action.datatables.DataTables;
 import com.bizservice.BizWorkerService;
+import com.entity.enumobj.Status;
 import com.entity.user.Worker;
 import com.exception.BizException;
 import com.service.ImageService;
@@ -191,8 +192,45 @@ public class BizWorkerServiceImpl implements BizWorkerService{
        workerService.update(worker);
         
     }
-  
+
+     /**
+      * 冻结或启用账号
+      */
+    public void ChangeStatus(int workerId, int flag) {
+        Worker worker = workerService.getById(workerId);
+        
+        if(worker == null){
+            throw new BizException("未找到该人员信息");
+        }
+        if(flag == 1){
+            worker.setStatus(Status.WORKER_DISABLE);
+        }else{
+            worker.setStatus(Status.WORKER_ABLE);
+        }
+        worker.setUpdateDate(new Date());
+        
+        workerService.update(worker);
+    }
+    /**
+     * 重置用户密码为默认手机后六位
+     */
+    public void UpdateDefaultPwd(int workerId) {
+        Worker worker = workerService.getById(workerId);
+        
+        if(worker == null){
+            throw new BizException("未找到该人员信息");
+        }
+        
+        worker.setPwd(Md5Utils.md5ForDefaultPwd(worker.getPhoneNumber()));
+        
+        worker.setUpdateDate(new Date());
+        
+        workerService.update(worker);
+        
+    }
    
+    
+    
     public ImageService getImageService() {
         return imageService;
     }
@@ -208,4 +246,5 @@ public class BizWorkerServiceImpl implements BizWorkerService{
     public void setWorkerService(WorkerService workerService) {
         this.workerService = workerService;
     }
+
 }

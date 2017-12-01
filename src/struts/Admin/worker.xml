@@ -4,8 +4,8 @@
 	"http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package namespace="/admin" name="worker" extends="comadmin">
-        <action name="user*" class="userAction" method="{1}">
-            <result name="Show">/WEB-INF/admin/User/userShow.jsp</result>
+        <action name="worker*" class="workerAction" method="{1}">
+            <result name="Show">/WEB-INF/admin/Worker/workerShow.jsp</result>
           
             <result name="AjaxShow" type="json">
                 <param name="root">dtJson</param>

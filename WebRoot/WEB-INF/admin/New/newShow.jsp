@@ -20,8 +20,8 @@
             </div>
            <div class="tableoptions" style="float: right;">
                  <div style="display: inline-block;">
-                    <a class="btn btn2 btn_book" href="admin/newAdd"><span>添加新闻</span></a>
-                    <a class="btn btn2 btn_book batchOp" href="admin/newDelete?ids={values}"  title="确认删除这些公告信息,删除后将不能恢复?|删除确认"><span>批量删除</span></a>
+                    <a class="btn btn_book" href="admin/newAdd"><span>添加新闻</span></a>
+                    <a class="btn btn_book batchOp" href="admin/newDelete?ids={values}"  title="确认删除这些公告信息,删除后将不能恢复?|删除确认"><span>批量删除</span></a>
                  </div>
             </div>
             <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablecb" id="newAjaxShow_Table">

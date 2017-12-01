@@ -2,6 +2,9 @@ package com.util;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import com.exception.BizException;
+
 import sun.misc.BASE64Encoder;
 /**
  * <p>ClassName: Md5Utils</p>
@@ -108,4 +111,12 @@ public class Md5Utils {
 	public static String md5ForPwd(String str){
     	return Md5Utils.md5(Md5Utils.md5(str));
     }
+	public static String md5ForDefaultPwd(String phoneNumber){
+	    if(phoneNumber == null || phoneNumber.trim().equals("") ||phoneNumber.length() != 11){
+	      throw new BizException("生成默认密码手机号不正确，请检测是否为11位手机号码。");  
+	    }
+	    return Md5Utils.md5(Md5Utils.md5(phoneNumber.substring(5,11)));
+	}
+	
+	
 }
