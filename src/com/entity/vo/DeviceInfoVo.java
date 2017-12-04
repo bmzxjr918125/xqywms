@@ -14,6 +14,11 @@ public class DeviceInfoVo implements Serializable {
      */
     private String deviceName;
     /**
+     * 设备类型
+     */
+    private String deviceType;
+    
+    /**
      * 供应商 设备厂家
      */
     private String supplier;
@@ -91,13 +96,19 @@ public class DeviceInfoVo implements Serializable {
     public void setCharge(String charge) {
         this.charge = charge;
     }
+    public String getDeviceType() {
+        return deviceType;
+    }
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
     
-    private DeviceInfoVo() {
+    public DeviceInfoVo() {
         super();
     }
-    private DeviceInfoVo(String deviceName, String supplier, String modelNum,
+    public DeviceInfoVo(String deviceName, String supplier, String modelNum,
             String input, String output, String cryogenType, String charge,
-            String description) {
+            String description,String deviceType) {
         super();
         this.deviceName = deviceName;
         this.supplier = supplier;
@@ -107,5 +118,7 @@ public class DeviceInfoVo implements Serializable {
         this.cryogenType = cryogenType;
         this.charge = charge;
         this.description = description;
+        this.deviceType = deviceType;
     }
+    
 }

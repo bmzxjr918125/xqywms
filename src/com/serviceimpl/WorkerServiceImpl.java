@@ -47,10 +47,10 @@ public class WorkerServiceImpl implements WorkerService{
         /**
          *创建人员信息
          */
-        public void create(String phoneNumber, String pwd,String department,String job) { 
+        public void create(String nickName,String phoneNumber, String department,String job) { 
             Worker worker = new Worker();
             
-            worker.create(phoneNumber,pwd,department,job);
+            worker.create(nickName,phoneNumber,department,job);
             
             workerDao.save(worker);
        }

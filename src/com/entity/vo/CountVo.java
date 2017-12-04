@@ -68,4 +68,15 @@ public class CountVo implements Serializable {
     public void setLastRepairDate(Date lastRepairDate) {
         this.lastRepairDate = lastRepairDate;
     }
+    public CountVo() {
+        super();
+        this.projectNum = 0;
+        this.repairNum = 0;
+        this.checkNum = 0;
+        this.lastCheckDate = new Date();
+        this.lastRepairDate = new Date();
+    }
+    
+    
+    
 }

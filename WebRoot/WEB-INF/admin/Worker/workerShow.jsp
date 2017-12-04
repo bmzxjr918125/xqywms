@@ -24,7 +24,7 @@
                                <div>
                                 <div class="tableoptions"
                                     style="border: 0px solid #ddd;float: left;">
-                                    <a class="btn btn_book"  id="addEmpl" href="javascript:void(0);"><span>添加人员</span></a> 
+                                    <a class="btn btn_book"  id="addEmpl"  onclick="addWorker();" href="javascript:void(0);"><span>添加人员</span></a> 
                                     <%--<a class="btn btn2 btn_book batchOp" href="merchant/employeeDeleteEmployees?ids={values}" title="确认删除这些店员,删除店员后将不能恢复?|删除确认"><span>批量删除</span>
                                     </a>  
                            --%></div>
@@ -86,6 +86,8 @@
 <script type="text/javascript">
 var oTable;
 var reqData = {};
+var departList = eval('(' + '${departJa}' + ')');
+var jobList =eval('(' + '${jobJa}' + ')');
 jQuery(document).ready(function(){
 
     var table = jQuery('#workerAjaxShow_Table');
@@ -149,8 +151,8 @@ jQuery(document).ready(function(){
                     
                     content+="<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='changeStatus("+JSON.stringify(full)+",2)'>启用</a>";
                 }
-                content+="&nbsp;&nbsp;<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='UpdateDefaultPwd("+JSON.stringify(full)+")'>密码重置</a>";
-                content+="&nbsp;&nbsp;<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='UpdateIntegral("+JSON.stringify(full)+")'>编辑</a>";
+                content+="&nbsp;&nbsp;<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='updateDefaultPwd("+JSON.stringify(full)+")'>密码重置</a>";
+                content+="&nbsp;&nbsp;<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='updateWorker("+JSON.stringify(full)+")'>编辑</a>";
                 return content;
             },
             'orderable':false,
@@ -176,8 +178,8 @@ jQuery("#query_button").click(function() {
     */
   function changeStatus(obj,flag){
 
-        var html ="人员手机：<input class='popup_prompt' maxlength='11'  value='"+obj.phoneNumber+"' disabled=true/><br/>";
-            html+="人员名称：<input class='popup_prompt' maxlength='10' value='"+obj.nickName+"' disabled=true /><br/>";
+        var html ="人员手机：<input class='popup_prompt' maxlength='11'  value='"+obj.phoneNumber+"' readonly=true disabled=true/><br/>";
+            html+="人员名称：<input class='popup_prompt' maxlength='10' value='"+obj.nickName+"' readonly=true disabled=true /><br/>";
                 html+="<span style='color:red;'> *冻结人员账号后，该账号将不能登录;启用账号后账号将恢复可用状态。</span><br/>";
         var str = "";
         if(flag == 1){
@@ -215,7 +217,7 @@ jQuery("#query_button").click(function() {
   /**
    *人员密码重置
    */
- function UpdateDefaultPwd(obj){
+ function updateDefaultPwd(obj){
 
      jConfirm(" <span style='color:red;'> * 重置账号密码后，密码为对应手机号后六位。</span>", "确认重置该账号密码?", function(r) {
            if (r) {
@@ -246,23 +248,59 @@ jQuery("#query_button").click(function() {
    /**
     *新建人员信息
     */
-  function UpdateIntegral(obj){
-
-        var html = "人员手机：<input class='popup_prompt' maxlength='11'  value='"+obj.phoneNumber+"' disabled=true/><br/>";
-            html+="人员昵称：<input class='popup_prompt' maxlength='10' value='"+obj.nickName+"' disabled=true /><br/>";
-            html+="增加积分：<input class='popup_prompt data-number' maxlength='10' id='integralNum' placeholder='请输入增加积分数量'/><span style='color:red;'> *</span><br/>";
-        jBmzAlert( html, "增加会员积分", function(r) {
+  function addWorker(){
+            if(departList == null || departList.length == 0 || typeof(departList) == "undefined" ){
+                jAlertErrorMsg("请先在系统管理中添加对应部门词条");
+                return false;
+            }
+            if(jobList == null || jobList.length == 0 || typeof(jobList) == "undefined" ){
+                jAlertErrorMsg("请先在系统管理中添加对应职位词条");
+                return false;
+            }
+        var html = "联系方式：<input class='popup_prompt data-number' id='input_phoneNumber' minlength='11' maxlength='11'  placeholder='请输入人员联系电话'/><br/>";
+            html+="人员名称：<input class='popup_prompt' maxlength='11' id='input_nickName'   placeholder='请输入人员名称' /><br/>";
+            html+="所在部门：<select class='popup_prompt' id='input_department'>";
+            for(var i=0;i<departList.length;i++){
+                html+="<option value='"+departList[i].id+"'>"+departList[i].value+"</option>";
+            }
+            html+="</select> </br>";
+            
+            html+="所属职位：<select class='popup_prompt' id='input_job'>";
+            for(var i=0;i<jobList.length;i++){
+                html+="<option value='"+jobList[i].id+"'>"+jobList[i].value+"</option>";
+            }
+            html+="</select></br>";
+            html+="<span style='color:red;'> * 添加人员信息账户初始密码为手机号后六位。</span><br/>";
+        jBmzAlert( html, "添加人员信息", function(r) {
             if (r) {
-                var integralNum = jQuery("#integralNum").val();
+                var nickName = jQuery("#input_nickName").val();
+                var phoneNumber = jQuery("#input_phoneNumber").val();
+                var department = jQuery("#input_department").find("option:selected").text();
+                var job = jQuery("#input_job").find("option:selected").text();
                 
-                if (integralNum == null || integralNum.trim() == "") {
-                    jAlertErrorMsg("请输入增加积分数量");
+                if (phoneNumber == null || phoneNumber.trim() == "") {
+                    jAlertErrorMsg("请输入人员手机号码");
+                    return false;
+                } 
+                if (nickName == null || nickName.trim() == "") {
+                    jAlertErrorMsg("请输入人员名称");
+                    return false;
+                } 
+                if (department == null || department.trim() == "") {
+                    jAlertErrorMsg("请选择人员部门");
+                    return false;
+                } 
+                if (job == null || job.trim() == "") {
+                    jAlertErrorMsg("请选择人员职位");
                     return false;
                 } 
                 var reData={};
-                reData["integralNum"]=integralNum;
+                reData["nickName"]=nickName;
+                reData["phoneNumber"]=phoneNumber;
+                reData["department"]=department;
+                reData["job"]=job;
                 
-                    var url = "admin/userAddSaveIntegral?userId="+obj.id;
+                    var url = "admin/workerAddSave";
                     jQuery.axse(
                         url,
                         reData,
@@ -282,6 +320,71 @@ jQuery("#query_button").click(function() {
         });
   }
 
+  /**
+   *编辑人员信息
+   */
+ function updateWorker(obj){
+       var html = "联系方式：<input class='popup_prompt data-number' maxlength='11' value='"+obj.phoneNumber+"' placeholder='请输入人员联系电话' readonly=true/><br/>";
+           html+="人员名称：<input class='popup_prompt' maxlength='11' id='input_nickName'  value='"+obj.nickName+"' placeholder='请输入人员名称' /><br/>";
+           html+="所在部门：<select class='popup_prompt' id='input_department'>";
+           html+="<option value='0' select='select'>"+obj.department+"</option>";
+           for(var i=0;i<departList.length;i++){
+               html+="<option value='"+departList[i].id+"'>"+departList[i].value+"</option>";
+           }
+           html+="</select> </br>";
+           
+           html+="所属职位：<select class='popup_prompt' id='input_job'>";
+           html+="<option value='0' select='select'>"+obj.job+"</option>";
+           for(var i=0;i<jobList.length;i++){
+               html+="<option value='"+jobList[i].id+"'>"+jobList[i].value+"</option>";
+           }
+           html+="</select>";
+          
+       jBmzAlert( html, "编辑人员信息", function(r) {
+           if (r) {
+               var nickName = jQuery("#input_nickName").val();
+               var department = jQuery("#input_department").find("option:selected").text();
+               var job = jQuery("#input_job").find("option:selected").text();
+               
+               if (nickName == null || nickName.trim() == "") {
+                   jAlertErrorMsg("请输入人员名称");
+                   return false;
+               } 
+               if (department == null || department.trim() == "") {
+                   jAlertErrorMsg("请选择人员部门");
+                   return false;
+               } 
+               if (job == null || job.trim() == "") {
+                   jAlertErrorMsg("请选择人员职位");
+                   return false;
+               } 
+               var reData={};
+               reData["workerId"]=obj.id;
+               reData["nickName"]=nickName;
+               reData["department"]=department;
+               reData["job"]=job;
+               
+                   var url = "admin/workerUpdateSave";
+                   jQuery.axse(
+                       url,
+                       reData,
+                       "请求发送中...",
+                       function(data) {
+                           if (data.response == "success") {
+                               jAlertSuccessMsg(data.msg);
+                               jAlertHide();
+                               oTable.fnDraw();
+                           } else {
+                               jAlertErrorMsg(data.msg);
+                           }
+                       }, function(data) {
+                           jAlertErrorMsg("请求错误");
+                       });
+           }
+       });
+ }
+   
+   
 </script>
 
 

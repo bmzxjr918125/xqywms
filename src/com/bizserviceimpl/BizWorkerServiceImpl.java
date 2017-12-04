@@ -88,12 +88,15 @@ public class BizWorkerServiceImpl implements BizWorkerService{
       return jo;
     }
     
-    public void register(String phoneNumber, String pwd,String department,String job) {
+    public void register(String nickName,String phoneNumber,String department,String job) {
        if(phoneNumber == null || "".equals(phoneNumber.trim())){
            throw new BizException("请输入正确的手机号");
        }
-       if(pwd == null || "".equals(pwd.trim())){
-           throw new BizException("请输入登录密码");
+       if(phoneNumber.length() != 11){
+           throw new BizException("请输入正确的11位手机号");
+       }
+       if(nickName == null || "".equals(nickName.trim())){
+           throw new BizException("请输入人员名称");
        }
        if(department == null || "".equals(department.trim())){
            throw new BizException("请输入人员部门");
@@ -105,9 +108,12 @@ public class BizWorkerServiceImpl implements BizWorkerService{
        //判断手机号
        Worker worker = workerService.getByPhone(phoneNumber);
        if(worker != null){
-           throw new BizException("该手机号已被注册");
+           throw new BizException("该手机号已被使用");
        }
-       workerService.create(phoneNumber,pwd,department,job);
+       workerService.create(nickName,phoneNumber,department,job);
+       
+       //TODO 发送短信通知
+       
     }
   
     
@@ -133,13 +139,15 @@ public class BizWorkerServiceImpl implements BizWorkerService{
     /**
      * 修改个人信息
      */
-    public void updateUser(Worker worker, String nickName,String department,String job){
+    public void updateSave(int workerId, String nickName,String department,String job){
+        Worker worker = workerService.getById(workerId);
+        
         if(worker == null){
-            throw new BizException("未找到该用户信息");
+            throw new BizException("未找到该人员信息");
         }
         
         if(nickName == null || "".equals(nickName.trim())){
-            throw new BizException("请填写用户昵称");
+            throw new BizException("请填写人员昵称");
         }
         if(department == null || "".equals(department.trim())){
             throw new BizException("请输入人员部门");
@@ -148,7 +156,6 @@ public class BizWorkerServiceImpl implements BizWorkerService{
             throw new BizException("请输入人员职位");
         }
     
-        worker = workerService.getById(worker.getId());
         worker.setUpdateDate(new Date());
         worker.setNickName(nickName);
         worker.setDepartment(department);
@@ -196,7 +203,7 @@ public class BizWorkerServiceImpl implements BizWorkerService{
      /**
       * 冻结或启用账号
       */
-    public void ChangeStatus(int workerId, int flag) {
+    public void changeStatus(int workerId, int flag) {
         Worker worker = workerService.getById(workerId);
         
         if(worker == null){
@@ -214,7 +221,7 @@ public class BizWorkerServiceImpl implements BizWorkerService{
     /**
      * 重置用户密码为默认手机后六位
      */
-    public void UpdateDefaultPwd(int workerId) {
+    public void updateDefaultPwd(int workerId) {
         Worker worker = workerService.getById(workerId);
         
         if(worker == null){

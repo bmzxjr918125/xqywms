@@ -200,12 +200,12 @@ public class ClientWorkerApiV1Action extends ClientBaseApiAction{
 	}
 	
 	public String UpdateUserInfo(){
-	    Worker worker = (Worker) super.request.getSession().getAttribute("workerInfo");
+	    int workerId = RequestUtils.getIntParamter("workerId");
 	    String nickName = RequestUtils.getStrParamter("nickName");
 	    String department = RequestUtils.getStrParamter("department");
 	    String job = RequestUtils.getStrParamter("job");
 	    
-	    bizWorkerService.updateUser(worker,nickName,department,job);
+	    bizWorkerService.updateSave(workerId,nickName,department,job);
 	    
 	    this.answer = new Answer(Answer.SUCCESS,Answer.SUCCESS_CODE,"修改个人信息成功");
 	    

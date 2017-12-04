@@ -6,8 +6,10 @@ import java.util.List;
 import net.sf.json.JSONObject;
 
 import com.base.action.datatables.DataTables;
+import com.entity.common.Entry;
 import com.entity.common.Image;
 import com.entity.common.New;
+import com.entity.enumobj.EntryType;
 
 
 /**
@@ -40,6 +42,8 @@ public interface BizCommonService {
     void updateSaveEntry(int id, String name);
 
     void deleteEntryByIds(String ids);
+
+    List<Entry> getEntryListByType(EntryType depart);
    
 
 }

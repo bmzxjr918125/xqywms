@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import net.sf.json.JSONObject;
 
 import com.base.action.datatables.DataTables;
-import com.entity.user.Worker;
 
 
 
@@ -56,7 +55,7 @@ public interface BizWorkerService {
      */
     JSONObject getWorkerInfo(Integer workerId);
     
-    void register(String phoneNumber, String pwd,String department,String job);
+    void register(String nickName,String phoneNumber,String department,String job);
     /**
      * <p>@Description: 修改人员头像</p>
      * <p>@param @param workerId
@@ -68,8 +67,8 @@ public interface BizWorkerService {
      * <p>@date 2017-8-24下午3:08:37</p>
      */
     JSONObject updateHeaderImg(int workerId, File file);
-    void updateUser(Worker worker, String nickName, String department,
-            String job);
+    void updateSave(int workerId, String nickName, String phoneNumber,
+            String department);
     void isRegister(String phoneNumber);
     void updatePwd(String newPwd, String newPwdAgin, String phoneNumber);
     /**
@@ -81,7 +80,7 @@ public interface BizWorkerService {
      * <p>@author BianMingZhou</p>
      * <p>@date 2017-12-1下午3:11:19</p>
      */
-    void ChangeStatus(int workerId, int flag);
+    void changeStatus(int workerId, int flag);
     /**
      * <p>@Description: 重置用户密码为默认手机后六位</p>
      * <p>@param @param workerId</p>   
@@ -90,7 +89,7 @@ public interface BizWorkerService {
      * <p>@author BianMingZhou</p>
      * <p>@date 2017-12-1下午3:15:31</p>
      */
-    void UpdateDefaultPwd(int workerId);
+    void updateDefaultPwd(int workerId);
   
    
   

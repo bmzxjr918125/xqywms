@@ -103,10 +103,12 @@ jQuery(document).ready(function(){
             str =  "巡检";
         }else if(flag == 2){
             str =  "维修";
-        }else if(flag == 2){
+        }else if(flag == 3){
             str =  "部门";
-        }else{
+        }else if(flag == 4){
             str =  "职位";
+        }else{
+            str =  "设备类型";
         }
         jBmzAlert( html, "添加"+str+"词条", function(r) {
             if (r) {
@@ -148,10 +150,12 @@ jQuery(document).ready(function(){
            str =  "巡检";
        }else if(flag == 2){
            str =  "维修";
-       }else if(flag == 2){
+       }else if(flag == 3){
            str =  "部门";
-       }else{
+       }else if(flag == 4){
            str =  "职位";
+       }else{
+           str =  "设备类型";
        }
        jBmzAlert( html, "修改"+str+"词条", function(r) {
            if (r) {

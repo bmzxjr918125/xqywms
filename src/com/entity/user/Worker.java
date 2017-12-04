@@ -201,12 +201,12 @@ public class Worker implements Serializable {
      * <p>@date 2017-8-24上午10:54:32</p>
      * @param myCode2 
      */
-    public void create(String phoneNumber2, String pwd2, String department,String job) {
+    public void create(String nickName, String phoneNumber, String department,String job) {
         this.createDate = new Date();
         this.lastLoginDate = new Date();
-        this.nickName = phoneNumber2;
-        this.pwd = Md5Utils.md5ForPwd(pwd2);
-        this.phoneNumber =phoneNumber2;
+        this.nickName = nickName;
+        this.pwd = Md5Utils.md5ForDefaultPwd(phoneNumber);
+        this.phoneNumber =phoneNumber;
         this.thisLoginDate = new Date();
         this.updateDate = new Date();
         // 设置默认头像
@@ -215,6 +215,7 @@ public class Worker implements Serializable {
         this.department = department;
         this.job = job;
         this.status = Status.WORKER_ABLE;
+        this.count = new CountVo();
         
     }
     

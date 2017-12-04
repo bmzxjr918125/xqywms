@@ -45,7 +45,7 @@ public class SendMsg_TC {
         }
     }
     /**
-     * <p>@Description: TODO</p>
+     * <p>@Description:</p>
      * <p>@param @param phoneNumber
      * <p>@param @param tempEmun
      * <p>@param @param paramsList
@@ -90,7 +90,6 @@ public class SendMsg_TC {
         try {
             sendMsg("15802861658",TempEmun.REGISTER_CODE,list);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

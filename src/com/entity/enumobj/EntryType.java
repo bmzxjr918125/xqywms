@@ -14,7 +14,8 @@ public enum EntryType implements IntegerValuedEnum{
     CHECK("巡检词条",1),
     REPAIR("维修词条",2),
     DEPART("部门词条",3),
-    JOB("职位词条",4);
+    JOB("职位词条",4),
+    DEVICETYPE("设备类型词条",5);
     // 描述
     private String description;
     //状态标号

@@ -1,5 +1,7 @@
 package com.serviceimpl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.base.action.datatables.DataTables;
 import com.dao.EntryDao;
 import com.entity.common.Entry;
+import com.entity.enumobj.EntryType;
 import com.service.EntryService;
 
 @Service("entryService")
@@ -35,6 +38,11 @@ public class EntryServiceImpl implements EntryService{
       
       }
       
+
+      public List<Entry> getEntryListByType(EntryType type) {
+           return entryDao.findByName("entryType", type.getIndex());
+      }
+      
    public EntryDao getEntryDao() {
         return entryDao;
     }
@@ -42,5 +50,6 @@ public class EntryServiceImpl implements EntryService{
     public void setEntryDao(EntryDao entryDao) {
         this.entryDao = entryDao;
     }
+
   
 }

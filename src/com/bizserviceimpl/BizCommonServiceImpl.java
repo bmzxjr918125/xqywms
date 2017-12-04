@@ -243,7 +243,11 @@ public class BizCommonServiceImpl implements BizCommonService{
             entryService.delete(entry);
         }
     }
-    
+
+    public List<Entry> getEntryListByType(EntryType type) {
+       
+        return  entryService.getEntryListByType(type);
+    }
     
     
     
@@ -290,5 +294,4 @@ public class BizCommonServiceImpl implements BizCommonService{
     public void setEntryService(EntryService entryService) {
         this.entryService = entryService;
     }
-
 }

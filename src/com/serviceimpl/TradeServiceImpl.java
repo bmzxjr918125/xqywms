@@ -34,17 +34,14 @@ public class TradeServiceImpl implements TradeService{
 	}
 
 	public double countDayByAdminId(String name, int adminId) {
-		// TODO Auto-generated method stub
 		return tradeDao.countDayByAdminId(name,adminId);
 	}
 
 	public double countMonthByAdminId(String name, int adminId) {
-		// TODO Auto-generated method stub
 		return tradeDao.countMonthByAdminId(name,adminId);
 	}
 
 	public double countAllByAdminId(String name, int adminId) {
-		// TODO Auto-generated method stub
 		return tradeDao.countAllByAdminId(name,adminId);
 	}
 

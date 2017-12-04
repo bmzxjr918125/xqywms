@@ -1,7 +1,10 @@
 package com.service;
 
+import java.util.List;
+
 import com.base.action.datatables.DataTables;
 import com.entity.common.Entry;
+import com.entity.enumobj.EntryType;
 
 
 
@@ -16,6 +19,8 @@ public interface EntryService {
     void save(Entry entry);
 
     void delete(Entry entry);
+
+    List<Entry> getEntryListByType(EntryType type);
 
 	
 }

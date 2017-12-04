@@ -1,6 +1,9 @@
 package com.entity.device;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +36,9 @@ public class DeviceCard implements Serializable {
         @AttributeOverride(name = "address", column = @Column( name = "address"))
     })*/
     private DeviceInfoVo deviceInfo;
+    @Column(nullable = false , columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP")
+    private Date createDate;
+    
     public Integer getId() {
         return id;
     }
@@ -44,6 +50,25 @@ public class DeviceCard implements Serializable {
     }
     public void setDeviceInfo(DeviceInfoVo deviceInfo) {
         this.deviceInfo = deviceInfo;
+    }
+    public Date getCreateDate() {
+        return createDate;
+    }
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+    /**
+     * <p>@Description: 创建</p>
+     * <p>@param @param deviceInfoVo
+     * <p>@param @return</p>   
+     * <p>@return DeviceCard</p> 
+     * <p>@throws</p>
+     * <p>@author BianMingZhou</p>
+     * <p>@date 2017-12-4下午4:17:33</p>
+     */
+    public void create(DeviceInfoVo deviceInfoVo) {
+       this.deviceInfo = deviceInfoVo;
+       this.createDate = new Date();
     }
     
 }

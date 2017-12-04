@@ -17,7 +17,8 @@
             <li><a href="#deviceul" class="gallery">设备管理</a>
                 <span class="arrow"></span>
                 <ul id="deviceul">
-                    <li id="deviceli1" class="power_111"><a href="admin/userShow">会员列表</a></li>
+                    <li id="deviceli1" class="power_111"><a href="admin/userShow">设备列表</a></li>
+                    <li id="deviceli2" class="power_112"><a href="admin/deviceCardShow">设备名片列表</a></li>
                 </ul>
             </li>
             <li><a href="#userul" class="gallery">客户管理</a>
@@ -64,6 +65,7 @@
                     <li id="keywordsli2" class="power_312"><a href="admin/entryShow?flag=2">维修词条</a></li>
                     <li id="keywordsli3" class="power_313"><a href="admin/entryShow?flag=3">部门词条</a></li>
                     <li id="keywordsli4" class="power_314"><a href="admin/entryShow?flag=4">职位词条</a></li>
+                    <li id="keywordsli5" class="power_315"><a href="admin/entryShow?flag=5">设备类型词条</a></li>
                 </ul>
             </li>
         </ul>
