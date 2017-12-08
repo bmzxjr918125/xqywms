@@ -656,3 +656,87 @@
 			loadStop();  
 		},1500);  
 	}
+	
+	function province(provinceList){
+	    
+	    var html = "";
+	   html ="<select class='popup_prompt address' onchange='city(jQuery(this).val())' id='input_province'>";
+	   html +="<option value='0'>-请选择省-</option>";
+        
+        for(var j = 0;j<provinceList.length;j++){
+            if(provinceList[j].flag != 2){
+                html+="<option value='"+provinceList[j].id+"'>"+provinceList[j].province+"</option>";
+            }
+        }
+        html+="</select>";
+        html+="<select class='popup_prompt address' onchange='area(jQuery(this).val())' id='input_city'>";
+        html +="<option value='0'>-请选择市-</option>";
+        html+="</select>";
+        html+="<select class='popup_prompt address' id='input_area'>";
+        html +="<option value='0'>-请选择区-</option>";
+        html+="</select>";
+	    return html;
+	}
+	
+	function city(provinceId){
+	    if(provinceId == 0){
+	        jQuery("#input_city").prop('selectedIndex', 0).click();
+	        jQuery("#input_city").empty();
+	        jQuery("#input_area").empty();
+	        jQuery("#input_city").append("<option value='0'>-请选择市-</option>");
+	        jQuery("#input_area").append("<option value='0'>-请选择区-</option>");
+	        return ;
+	    }
+	    jQuery.axse(
+	              "common/commonGetCityList?provinceId="+provinceId,
+	              null,
+	              "请求发送中...",
+	              function(data) {
+	                  if (data.response == "success") {
+	                      var html = "";
+	                      var cityList = data.result;
+	                       html +="<option value='0'>-请选择市-</option>";
+	                       for(var j = 0;j<cityList.length;j++){
+	                               html+="<option value='"+cityList[j].id+"'>"+cityList[j].city+"</option>";
+	                       }
+	                       jQuery("#input_city").empty();
+	                      jQuery("#input_city").append(html);
+	                       
+	                  } else {
+	                      jAlertErrorMsg(data.msg);
+	                  }
+	              }, function(data) {
+	                  jAlertErrorMsg("请求错误");
+	              });
+	}
+	
+	function area(cityId){
+        if(cityId == 0){
+            jQuery("#input_area").prop('selectedIndex', 0).click();
+            jQuery("#input_area").empty();
+            jQuery("#input_area").append("<option value='0'>-请选择区-</option>");
+            return ;
+        }
+        jQuery.axse(
+                  "common/commonGetAreaList?cityId="+cityId,
+                  null,
+                  "请求发送中...",
+                  function(data) {
+                      if (data.response == "success") {
+                          var html = "";
+                          var areaList = data.result;
+                          html +="<option value='0'>-请选择区-</option>";
+                           for(var j = 0;j<areaList.length;j++){
+                                   html+="<option value='"+areaList[j].id+"'>"+areaList[j].area+"</option>";
+                           }
+                           jQuery("#input_area").empty();
+                          jQuery("#input_area").append(html);
+                           
+                          
+                      } else {
+                          jAlertErrorMsg(data.msg);
+                      }
+                  }, function(data) {
+                      jAlertErrorMsg("请求错误");
+                  });
+    }

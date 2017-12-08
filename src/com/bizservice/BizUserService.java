@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import net.sf.json.JSONObject;
 
 import com.base.action.datatables.DataTables;
-import com.entity.project.ProjectUser;
 import com.entity.user.User;
 
 
@@ -40,7 +39,6 @@ public interface BizUserService {
      */
     JSONObject getUserInfo(Integer userId);
     
-    void register(String phoneNumber, String pwd,ProjectUser projectUser);
     void updateUser(User user, String nickName, int sex, String profession,
             String province, String city, String area, String address);
     void isRegister(String phoneNumber);

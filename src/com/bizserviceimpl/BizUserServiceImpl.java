@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.base.action.datatables.DataTables;
 import com.bizservice.BizUserService;
-import com.entity.project.ProjectUser;
 import com.entity.user.User;
 import com.entity.vo.AddressVo;
 import com.exception.BizException;
@@ -86,22 +85,7 @@ public class BizUserServiceImpl implements BizUserService{
       
       return jo;
     }
-    
-    public void register(String phoneNumber, String pwd,ProjectUser projectUser) {
-       if(phoneNumber == null || "".equals(phoneNumber.trim())){
-           throw new BizException("请输入正确的手机号");
-       }
-       if(pwd == null || "".equals(pwd.trim())){
-           throw new BizException("请输入登录密码");
-       }
-       
-       //判断手机号
-       User user = userService.getByPhone(phoneNumber);
-       if(user != null){
-           throw new BizException("该手机号已被注册");
-       }
-       userService.create(phoneNumber,pwd,projectUser);
-    }
+   
     /**
      * 修改个人信息
      */

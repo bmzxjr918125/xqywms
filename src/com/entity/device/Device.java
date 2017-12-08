@@ -58,7 +58,7 @@ public class Device implements Serializable {
     /**
      * 出厂日期
      */
-    private String productionDate;
+    private Date productionDate;
     /**
      * 购买日期
      */
@@ -160,20 +160,34 @@ public class Device implements Serializable {
     public void setDeviceInfo(DeviceInfoVo deviceInfo) {
         this.deviceInfo = deviceInfo;
     }
-
-    public String getProductionDate() {
-        return productionDate;
-    }
-
-    public void setProductionDate(String productionDate) {
-        this.productionDate = productionDate;
-    }
-
     public String getOtherDesc() {
         return otherDesc;
     }
 
     public void setOtherDesc(String otherDesc) {
+        this.otherDesc = otherDesc;
+    }
+
+    public Date getProductionDate() {
+        return productionDate;
+    }
+
+    public void setProductionDate(Date productionDate) {
+        this.productionDate = productionDate;
+    }
+
+    public void create(DeviceInfoVo deviceInfo,
+            String deviceNo, Date productionDate, Date buyDate,
+            Admin admin, String otherDesc) {
+        this.deviceInfo = deviceInfo;
+        this.status = Status.DEVICE_NORMAL;
+        this.deviceNo = deviceNo;
+        this.productionDate = productionDate;
+        this.buyDate = buyDate;
+        this.projectDevice = null;
+        this.admin = admin;
+        this.createDate = new Date();
+        this.updateDate = new Date();
         this.otherDesc = otherDesc;
     }
     

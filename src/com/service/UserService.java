@@ -2,7 +2,6 @@ package com.service;
 
 
 import com.base.action.datatables.DataTables;
-import com.entity.project.ProjectUser;
 import com.entity.user.User;
 
 
@@ -26,8 +25,6 @@ public interface UserService {
 
     String getNextCode();
 
-    void create(String phoneNumber, String pwd, ProjectUser projectUser);
-
 
 
 
@@ -35,6 +32,9 @@ public interface UserService {
 
 
     void getDataTablePage(DataTables dtJson, String nikeName, String phoneNumber);
+
+
+    void delete(User user);
 
 	
 }

@@ -9,7 +9,6 @@ import net.sf.json.JSONObject;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import com.apiaction.base.ClientBaseApiAction;
-import com.entity.project.ProjectUser;
 import com.entity.user.User;
 import com.exception.BizException;
 import com.util.RequestUtils;
@@ -114,7 +113,7 @@ public class ClientUserApiV1Action extends ClientBaseApiAction{
         return super.ANSWER;
     }
 	
-	
+	/*
 	public String Register(){
 	    String phoneNumber = RequestUtils.getStrParamter("phoneNumber");
 	    String phoneCode = RequestUtils.getStrParamter("phoneCode");
@@ -142,7 +141,7 @@ public class ClientUserApiV1Action extends ClientBaseApiAction{
 	    
 	    this.answer=new Answer(Answer.SUCCESS,Answer.SUCCESS_CODE,"注册用户成功");
 	    return super.ANSWER;
-	}
+	}*/
 	public String ValiForGetCode(){
 	    String phoneNumber = RequestUtils.getStrParamter("phoneNumber");
 	    String phoneCode = RequestUtils.getStrParamter("phoneCode");

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.base.action.datatables.DataTables;
 import com.dao.UserDao;
-import com.entity.project.ProjectUser;
 import com.entity.user.User;
 import com.service.ImageService;
 import com.service.UserService;
@@ -31,7 +30,11 @@ public class UserServiceImpl implements UserService{
 		     userDao.getDataTablePage(dtJson,nikeName,phoneNumber);
 	     }
 	
-        
+		 public void delete(User user) {
+		     userDao.delete(user);
+	        }
+		 
+		 
         public User getById(Integer userId) {
             return userDao.get(userId);
         }
@@ -39,12 +42,6 @@ public class UserServiceImpl implements UserService{
             
             return userDao.getNextCode();
         }
-        public void create(String phoneNumber, String pwd,ProjectUser projectUser) { 
-            User user = new User();
-            user.create(phoneNumber,pwd,projectUser);
-            
-            userDao.save(user);
-       }
         public int countUserNumber(String formatDate) {
             
             return userDao.countUserNumber(formatDate);

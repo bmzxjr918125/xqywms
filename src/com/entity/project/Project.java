@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Random;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
+
+import com.entity.enumobj.Boolean;
 import com.entity.enumobj.CheckType;
 import com.entity.enumobj.ProjectType;
 import com.entity.user.User;
@@ -51,7 +54,9 @@ public class Project implements Serializable {
     /**
      * 是否收费维保
      */
-    private boolean isChargeRepair;
+    @Type(type = "com.entity.enumobj.base.IntegerValuedEnumType",
+            parameters = {@Parameter(name = "enum" , value = "com.entity.enumobj.Boolean")})
+    private com.entity.enumobj.Boolean isChargeRepair;
     /**
      * 维保开始时间
      */
@@ -81,7 +86,7 @@ public class Project implements Serializable {
     /**
      * 项目甲方指定负责人
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", nullable = false)
     private User user;
    /**
@@ -126,15 +131,6 @@ public class Project implements Serializable {
     public void setProjectType(ProjectType projectType) {
         this.projectType = projectType;
     }
-
-    public boolean isChargeRepair() {
-        return isChargeRepair;
-    }
-
-    public void setChargeRepair(boolean isChargeRepair) {
-        this.isChargeRepair = isChargeRepair;
-    }
-
     public Date getRepairDateStart() {
         return repairDateStart;
     }
@@ -183,6 +179,14 @@ public class Project implements Serializable {
         this.projectName = projectName;
     }
     
+    public com.entity.enumobj.Boolean getIsChargeRepair() {
+        return isChargeRepair;
+    }
+    public void setIsChargeRepair(com.entity.enumobj.Boolean isChargeRepair) {
+        this.isChargeRepair = isChargeRepair;
+    }
+    
+    
     /**
      * <p>@Description: 生成项目号</p>
      * <p>@param @param phoneNumber
@@ -207,6 +211,21 @@ public class Project implements Serializable {
           return orderNumber;
       }
       
+    public void create(ProjectType pType, Boolean pIsChargeRepair,
+            CheckType pCheckType, String projectName, 
+            AddressVo addressVo, Date sDate, Date eDate,String userPhoneNumber,String description) {
+       this.projectType = pType;
+       this.checkType = pCheckType;
+       this.isChargeRepair = pIsChargeRepair;
+       this.projectName = projectName;
+       this.address = addressVo;
+       this.repairDateStart = sDate;
+       this.repairDateEnd = eDate;
+       this.createDate = new Date();
+       this.projectNo = Project.createProjectNo(userPhoneNumber);
+       this.description = description;
+        
+    }
       
     
 }

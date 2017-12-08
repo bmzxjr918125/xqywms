@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="manageactivitie" location="0,0" size="0,0">
+    <action name="manageActivitie*" location="0,0" size="0,0">
+      <result name="show">
+        <resourceEdge source="show" routing="0" target="activitieShow.jsp" />
+      </result>
+      <result name="addclick">
+        <resourceEdge source="addclick" routing="0" target="activitieAdd.jsp" />
+      </result>
+      <result name="addsave" />
+      <result name="addsaveError" />
+      <result name="typechoose">
+        <resourceEdge source="typechoose" routing="0" target="activitieAdd.jsp" />
+      </result>
+      <result name="delete" />
+    </action>
+  </package>
+  <webResource name="index.jsp" path="/WEB-INF/page/Admin/menu/index.jsp" location="24,205" size="150,55" />
+  <webResource name="activitieShow.jsp" path="WEB-INF/page/Admin/activitieManage/activitieShow.jsp" location="0,0" size="0,0" />
+  <webResource name="activitieAdd.jsp" path="WEB-INF/page/Admin/activitieManage/activitieAdd.jsp" location="0,0" size="0,0" />
+</Struts2Diagram>
+

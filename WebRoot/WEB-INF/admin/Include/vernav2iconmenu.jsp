@@ -11,13 +11,13 @@
             <li><a href="#projectul" class="gallery">项目管理</a>
                 <span class="arrow"></span>
                 <ul id="projectul">
-                    <li id="projectli1" class="power_101"><a href="admin/userShow">项目列表</a></li>
+                    <li id="projectli1" class="power_101"><a href="admin/projectShow">项目列表</a></li>
                 </ul>
             </li>
             <li><a href="#deviceul" class="gallery">设备管理</a>
                 <span class="arrow"></span>
                 <ul id="deviceul">
-                    <li id="deviceli1" class="power_111"><a href="admin/userShow">设备列表</a></li>
+                    <li id="deviceli1" class="power_111"><a href="admin/deviceShow">设备列表</a></li>
                     <li id="deviceli2" class="power_112"><a href="admin/deviceCardShow">设备名片列表</a></li>
                 </ul>
             </li>

@@ -38,6 +38,17 @@ public enum CheckType implements IntegerValuedEnum{
         }
         throw new BizException("当前周期类型不可用");
     }
+    public static CheckType getByIndex(int index) {
+        
+        for (CheckType c : CheckType.values()) {
+            
+            if (c.getIndex() == index) {
+                
+                return c;
+            }
+        }
+        throw new BizException("当前巡检周期类型不可用");
+    }
 	public String getDescription() {
 		return description;
 	}

@@ -3,6 +3,7 @@ package com.entity.user;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -73,7 +74,7 @@ public class User implements Serializable {
 	/**
 	 * 对应项目
 	 */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false , name = "projectUserId")
 	private ProjectUser projectUser;
     /**
@@ -195,16 +196,17 @@ public class User implements Serializable {
      * <p>@throws</p>
      * <p>@author BianMingZhou</p>
      * <p>@date 2017-11-28下午2:21:31</p>
+     * @param projectUser2 
      */
-    public void create(String phoneNumber2, String pwd2,ProjectUser projectUser) {
+    public void create(String phoneNumber2, ProjectUser projectUser2) {
         
         this.createDate = new Date();
         this.lastLoginDate = new Date();
         this.nickName = phoneNumber2;
-        this.pwd = Md5Utils.md5ForPwd(pwd2);
+        this.projectUser = projectUser2;
+        this.pwd = Md5Utils.md5ForDefaultPwd(phoneNumber2);
         this.phoneNumber =phoneNumber2;
         this.thisLoginDate = new Date();
         this.updateDate = new Date();
-        this.projectUser = projectUser;
     }
 }

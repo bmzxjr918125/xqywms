@@ -34,6 +34,18 @@ public enum Boolean implements IntegerValuedEnum{
         }
         throw new BizException("当前判断状态不可用");
     }
+public static Boolean getByIndex(int index) {
+        
+        for (Boolean c : Boolean.values()) {
+            
+            if (c.getIndex() == index) {
+                
+                return c;
+            }
+        }
+        throw new BizException("当前判断状态不可用");
+    }
+    
 	private Boolean(String description, int index, boolean value) {
         this.description = description;
         this.index = index;

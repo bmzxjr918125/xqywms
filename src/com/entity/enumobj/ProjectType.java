@@ -35,6 +35,17 @@ public enum ProjectType implements IntegerValuedEnum{
         }
         throw new BizException("当前项目类型不可用");
     }
+  public static ProjectType getByIndex(int index) {
+        
+        for (ProjectType c : ProjectType.values()) {
+            
+            if (c.getIndex() == index) {
+                
+                return c;
+            }
+        }
+        throw new BizException("当前项目类型不可用");
+    }
 	public String getDescription() {
 		return description;
 	}

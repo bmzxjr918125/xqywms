@@ -46,6 +46,7 @@ String imagePath="http://119.29.143.200:80/";
 	<script type="text/javascript" src="<%=basePath%>js/custom/elements.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/jquery.md5.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/EnumExChange.js"></script>
+    <script type="text/javascript" src="<%=basePath%>js/plugins/chosen.jquery.min.js"></script>
     <!-- <script type="text/javascript" src="js/custom/dashboard.js"></script> -->
 	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/plugins/excanvas.min.js"></script><![endif]-->
 	<!--[if IE 9]>

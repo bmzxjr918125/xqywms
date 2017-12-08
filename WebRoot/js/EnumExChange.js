@@ -2,37 +2,87 @@
 /// 枚举 转换
 ///
 /**
- * 会员等级
+ * 项目类型
  * @param data
  * @returns {String}
  */
-function grade(data){
-	if (data == "ONE") {
-		return "普通会员";
-	}else if (data == "TWO") {
-		return "金卡会员";
-	}else if (data == "THREE") {
-		return "钻石会员";
+function projectType(data){
+	if (data == "PERSONAL") {
+		return "个人";
+	}else if (data == "PROJECT") {
+		return "工程";
 	}else {
-		return "----";
+		return "--";
 	}
 } 
+function projectTypeIndex(data){
+    if (data == "PERSONAL") {
+        return 1;
+    }else if (data == "PROJECT") {
+        return 2;
+    }
+} 
 /**
- * 性别
+ * 封装 boolean枚举
  * @param data
  * @returns {String}
  */
- function sex(data){
-	 if (data == "BOY") {
-		 return "<span style='color:#f6e4a5;'>男</span>";
-	 }else if (data == "GIRL") {
-		 return "<span style='color:#78ce07'>女</span>";
-	 }else if(data == "NONE"){
-		 return "<span style='color:#fb9337'>其它</span>";
-	 }else{
-		 return "----";
-	 }
- }
+function boolean(data){
+    if (data == "YES") {
+        return "是";
+    }else if (data == "NO") {
+        return "否";
+    }else {
+        return "--";
+    }
+}
+/**
+ * 封装 boolean枚举
+ * @param data
+ * @returns {String}
+ */
+function booleanIndex(data){
+    if (data == "YES") {
+        return 1;
+    }else if (data == "NO") {
+        return 0;
+    }
+}
+/**
+ * 巡检周期类型
+ * @param data
+ * @returns {String}
+ */
+function checkType(data){
+    if (data == "NONE") {
+        return "无";
+    }else if (data == "DAY") {
+        return "日巡";
+    }else if (data == "WEEK") {
+        return "周巡";
+    }else if (data == "MONTH") {
+        return "月巡";
+    }else if (data == "QUARTER") {
+        return "季度巡";
+    }else {
+        return "--";
+    }
+}
+function checkTypeIndex(data){
+    if (data == "NONE") {
+        return 1;
+    }else if (data == "DAY") {
+        return 2;
+    }else if (data == "WEEK") {
+        return 3;
+    }else if (data == "MONTH") {
+        return 4;
+    }else if (data == "QUARTER") {
+        return 5;
+    }else {
+        return "--";
+    }
+}
  
  /**
   * 状态

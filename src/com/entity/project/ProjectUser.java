@@ -2,6 +2,8 @@ package com.entity.project;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,13 +32,13 @@ public class ProjectUser implements Serializable {
      * 对应项目
      */
     @ManyToOne
-    @JoinColumn(name="projectId",nullable=false)
+    @JoinColumn(name="projectId",nullable=true)
     private Project project;
     /**
      * 对应客户
      */
-    @OneToOne
-    @JoinColumn(name="userId",nullable=false)
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name="userId",nullable=true)
     private User user;
     /**
      * 加入日期

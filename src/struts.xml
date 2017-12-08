@@ -83,6 +83,7 @@
         </package>
      
      <include file="struts/Admin/*.xml" />
+     <include file="struts/Common/*.xml" />
       <!--前端User用户-->
      <include file="struts/Api/User/*.xml" />
 

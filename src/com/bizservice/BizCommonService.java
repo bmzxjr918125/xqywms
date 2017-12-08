@@ -3,6 +3,7 @@ package com.bizservice;
 import java.io.File;
 import java.util.List;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.base.action.datatables.DataTables;
@@ -44,6 +45,12 @@ public interface BizCommonService {
     void deleteEntryByIds(String ids);
 
     List<Entry> getEntryListByType(EntryType depart);
+
+    JSONArray getProvinceList();
+
+    JSONArray getCityList(int provinceId);
+
+    JSONArray getAreaList(int cityId);
    
 
 }

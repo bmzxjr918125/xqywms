@@ -17,9 +17,12 @@ import org.springframework.stereotype.Service;
 import com.base.action.datatables.DataTables;
 import com.bizservice.BizCommonService;
 import com.config.GeneralConfig;
+import com.entity.common.Area;
+import com.entity.common.City;
 import com.entity.common.Entry;
 import com.entity.common.Image;
 import com.entity.common.New;
+import com.entity.common.Province;
 import com.entity.enumobj.EntryType;
 import com.entity.enumobj.ImageType;
 import com.exception.BizException;
@@ -249,7 +252,24 @@ public class BizCommonServiceImpl implements BizCommonService{
         return  entryService.getEntryListByType(type);
     }
     
-    
+
+
+    public JSONArray getProvinceList() {
+        List<Province> provinceList = provinceService.getProvinceList();
+        return JSONArray.fromObject(provinceList);
+    }
+
+
+    public JSONArray getCityList(int provinceId) {
+        List<City> cityList = cityService.getCityList(provinceId);
+        return JSONArray.fromObject(cityList);
+    }
+
+
+    public JSONArray getAreaList(int cityId) {
+        List<Area> areaList = areaService.getAreaList(cityId);
+        return JSONArray.fromObject(areaList);
+    }
     
     
     public ProvinceService getProvinceService() {
