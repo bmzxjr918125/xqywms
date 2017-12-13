@@ -12,7 +12,23 @@ public class ProjectDeviceDaoImpl extends BaseDaoImpl<ProjectDevice> implements 
     public void getDataTablePage(DataTables dtJson,int projectId) {
         StringBuffer hql = new StringBuffer(" from ProjectDevice ");
         hql.append(" where project.id = "+projectId);
-        super.findByPage(hql.toString(), dtJson);
+        
+        hql.append(" and ( device.deviceInfo.deviceName like ? or ");
+        hql.append(" device.deviceInfo.deviceType like ? or ");
+        hql.append(" device.deviceInfo.modelNum like ? or ");
+        //hql.append(" ( IFNULL(d.projectDevice.project.projectName,'') like ? ) or ");
+        hql.append(" position like ?  or ");
+        hql.append(" device.deviceNo like ? )  ");
+       
+        
+        //排序
+        super.findByPage(hql.toString(), dtJson,
+                "%"+dtJson.getSearch().getValue()+"%",
+                "%"+dtJson.getSearch().getValue()+"%",
+                "%"+dtJson.getSearch().getValue()+"%",
+                "%"+dtJson.getSearch().getValue()+"%",
+                //"%"+dtJson.getSearch().getValue()+"%",
+                "%"+dtJson.getSearch().getValue()+"%");
     }
    
 }

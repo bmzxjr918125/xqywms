@@ -36,6 +36,11 @@ public class DeviceServiceImpl implements DeviceService{
     public void delete(Device device) {
         deviceDao.delete(device);
     }
+    public List<String> getDeviceNameAndIdList(Boolean pDeviceIsNull, int status) {
+        return deviceDao.getDeviceNameAndIdList(pDeviceIsNull,status);
+    }
+    
+    
     
     public DeviceDao getDeviceDao() {
         return deviceDao;

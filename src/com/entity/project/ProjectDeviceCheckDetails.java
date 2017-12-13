@@ -37,13 +37,15 @@ public class ProjectDeviceCheckDetails implements Serializable {
 	/**
 	 * 巡检人员
 	 */
+	@ManyToOne
+    @JoinColumn(name="projectWorkerId",nullable=false)
 	private ProjectWorker projectWorker;
 	/**
      * 巡检结果 jsonArray字符串
-     * [{"id":1,"name":"是否运行正常","value":true,"desc":""},
-     *  {"id":2,"name":"是否制冷正常","value":true,"desc":""},
-     *  {"id":3,"name":"是否运行正常","value":false,"desc":""}]
-     *  LongText
+      [{"id":1,"name":"是否运行正常","value":false,"desc":"123"},
+       {"id":2,"name":"是否制冷正常","value":true,"desc":"346"},
+       {"id":3,"name":"是否运行正常","value":false,"desc":"789"}]
+     * LongText
      */
     @Column(length = 16777216)
 	private String checkJa;

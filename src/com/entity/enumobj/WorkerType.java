@@ -35,6 +35,28 @@ public enum WorkerType implements IntegerValuedEnum{
         }
         throw new BizException("当前人员类型不可用");
     }
+    
+    public static boolean isContain(int workerType){
+        boolean flag=false;
+         for (WorkerType c : WorkerType.values()) {
+                     if (c.getIndex() == workerType) {
+                         flag=true;
+                         break;
+                     }
+         }
+         return flag;
+    }
+    public static WorkerType getByIndex(int index) {
+        
+        for (WorkerType c : WorkerType.values()) {
+            
+            if (c.getIndex() == index) {
+                
+                return c;
+            }
+        }
+        throw new BizException("当前人员类型不可用");
+    }
 	public String getDescription() {
 		return description;
 	}

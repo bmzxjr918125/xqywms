@@ -7,6 +7,8 @@
         <action name="project*" class="projectAction" method="{1}">
             <result name="Show">/WEB-INF/admin/Project/projectShow.jsp</result>
             <result name="DeviceShow">/WEB-INF/admin/Project/projectDeviceShow.jsp</result>
+            <result name="DeviceCheckShow">/WEB-INF/admin/Project/projectDeviceCheckShow.jsp</result>
+            <result name="WorkerShow">/WEB-INF/admin/Project/projectWorkerShow.jsp</result>
           
             <result name="AjaxShow" type="json">
                 <param name="root">dtJson</param>

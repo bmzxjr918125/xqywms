@@ -1,6 +1,7 @@
 package com.service;
 
 import java.io.File;
+import java.util.List;
 
 import com.base.action.datatables.DataTables;
 import com.entity.user.Worker;
@@ -42,6 +43,9 @@ public interface WorkerService {
 
 
     void updateHeaderImg(Worker worker, File file);
+
+
+    List<Worker> getCanAddToProjectWorker(List<Integer> falseWorkerIds);
 
 
 	

@@ -64,6 +64,12 @@ public class WorkerServiceImpl implements WorkerService{
             list.add(oldImage);
             imageService.deleteImages(list);
         }
+        public List<Worker> getCanAddToProjectWorker(
+                List<Integer> falseWorkerIds) {
+           
+            return workerDao.getCanAddToProjectWorker(falseWorkerIds);
+        }
+        
         
         public ImageService getImageService() {
             return imageService;
@@ -79,6 +85,4 @@ public class WorkerServiceImpl implements WorkerService{
         public void setWorkerDao(WorkerDao workerDao) {
             this.workerDao = workerDao;
         }
-      
-       
 }

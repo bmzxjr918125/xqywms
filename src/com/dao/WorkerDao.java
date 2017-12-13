@@ -1,6 +1,8 @@
 package com.dao;
 
 
+import java.util.List;
+
 import com.base.action.datatables.DataTables;
 import com.base.dao.BaseDao;
 import com.entity.user.Worker;
@@ -30,6 +32,7 @@ public interface WorkerDao extends BaseDao<Worker>{
      */
     void getDataTablePage(DataTables dtJson, String nickName,
             String phoneNumber, int status);
+    List<Worker> getCanAddToProjectWorker(List<Integer> falseWorkerIds);
   
 
 }

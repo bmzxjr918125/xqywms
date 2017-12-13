@@ -1,4 +1,6 @@
 package com.service;
+import java.util.List;
+
 import com.base.action.datatables.DataTables;
 import com.entity.device.Device;
 
@@ -16,6 +18,8 @@ public interface DeviceService {
     void update(Device device);
 
     void delete(Device device);
+
+    List<String> getDeviceNameAndIdList(Boolean pDeviceIsNull, int status);
 
 	
 }

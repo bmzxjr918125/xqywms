@@ -1,5 +1,7 @@
 package com.daoimpl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.base.action.datatables.DataTables;
@@ -29,6 +31,25 @@ public class DeviceDaoImpl extends BaseDaoImpl<Device> implements DeviceDao{
                // "%"+dtJson.getSearch().getValue()+"%",
                 //"%"+dtJson.getSearch().getValue()+"%",
                 "%"+dtJson.getSearch().getValue()+"%");
+    }
+
+   @SuppressWarnings("unchecked")
+   public List<String> getDeviceNameAndIdList(Boolean pDeviceIsNull, int status) {
+       StringBuffer hql = new StringBuffer(" select new map(id as id,deviceInfo.deviceName as name) from Device" +
+       		" where id != 0 ");
+       if(status != 0){
+           hql.append(" and status = "+status);
+       }
+       if(pDeviceIsNull != null){
+           if(pDeviceIsNull){
+               hql.append(" and projectDevice is null");
+           }else{
+               hql.append(" and projectDevice is not null");
+           }
+           
+       }
+       
+       return this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString()).list();
     }
 
     /*public void getDataTablePage(DataTables dtJson) {

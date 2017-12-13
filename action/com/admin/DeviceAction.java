@@ -4,6 +4,8 @@ import javax.annotation.Resource;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -12,8 +14,10 @@ import com.bizservice.BizDeviceService;
 import com.bizservice.BizProjectService;
 import com.bizservice.BizWorkerService;
 import com.entity.admin.Admin;
+import com.entity.device.Device;
 import com.entity.device.DeviceCard;
 import com.entity.enumobj.EntryType;
+import com.entity.enumobj.Status;
 import com.util.RequestUtils;
 import com.util.pojo.Answer;
 /**
@@ -107,10 +111,18 @@ public class DeviceAction extends BaseAction {
        
        return super.ANSWER;
     }
+    public String GetDeviceNameAndIdList(){
+        Boolean pDeviceIsNull = true;
+        JSONArray ja = bizDeviceService.getDeviceNameAndIdList(pDeviceIsNull,Status.DEVICE_NORMAL.getIndex());
+        super.answer = new Answer(Answer.SUCCESS,Answer.SUCCESS_CODE,"请求成功",ja);
+        
+        return super.ANSWER;
+    }
+    
     
     public String GetCardById(){
         int cardId = RequestUtils.getIntParamter("id");
-        DeviceCard deviceCard = bizDeviceService.getById(cardId);
+        DeviceCard deviceCard = bizDeviceService.getCardById(cardId);
         super.answer = new Answer(Answer.SUCCESS,Answer.SUCCESS_CODE,"请求成功",JSONObject.fromObject(deviceCard));
         return super.ANSWER;
     }
@@ -150,6 +162,19 @@ public class DeviceAction extends BaseAction {
         bizDeviceService.deletes(ids);
         super.answer = new Answer(Answer.SUCCESS,Answer.SUCCESS_CODE,"删除成功。");
         
+        return super.ANSWER;
+    }
+    public String GetDeviceById(){
+        int deviceId = RequestUtils.getIntParamter("id");
+        Device device = bizDeviceService.getById(deviceId);
+        
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setIgnoreDefaultExcludes(false); //设置默认忽略 
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);//设置循环策略为忽略    解决json最头疼的问题 死循环
+        //jsonConfig.setExcludes(new String[]{"handler","hibernateLazyInitializer"});  
+        jsonConfig.setExcludes(new String[]{"handler","hibernateLazyInitializer","projectDevice"});  
+        
+        super.answer = new Answer(Answer.SUCCESS,Answer.SUCCESS_CODE,"请求成功",JSONObject.fromObject(device,jsonConfig));
         return super.ANSWER;
     }
     

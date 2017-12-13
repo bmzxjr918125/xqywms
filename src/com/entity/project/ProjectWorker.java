@@ -32,7 +32,7 @@ public class ProjectWorker implements Serializable {
      */
     @ManyToOne
     @JoinColumn(name="projectDeviceId",nullable=false)
-    private ProjectDevice projectDeviceId;
+    private ProjectDevice projectDevice;
     /**
      * 对应工作人员
      */
@@ -74,10 +74,18 @@ public class ProjectWorker implements Serializable {
     public void setWorkerType(WorkerType workerType) {
         this.workerType = workerType;
     }
-    public ProjectDevice getProjectDeviceId() {
-        return projectDeviceId;
+    public ProjectDevice getProjectDevice() {
+        return projectDevice;
     }
-    public void setProjectDeviceId(ProjectDevice projectDeviceId) {
-        this.projectDeviceId = projectDeviceId;
+    public void setProjectDevice(ProjectDevice projectDevice) {
+        this.projectDevice = projectDevice;
+    }
+    
+    public void create(ProjectDevice projectDevice, Worker worker,
+            WorkerType workerTypeEnum) {
+        this.projectDevice = projectDevice;
+        this.worker = worker;
+        this.workerType = workerTypeEnum;
+        this.createDate = new Date();
     }
 }

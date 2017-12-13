@@ -1,6 +1,9 @@
 package com.bizservice;
 
+import net.sf.json.JSONObject;
+
 import com.base.action.datatables.DataTables;
+import com.entity.project.Project;
 
 /**
  * <p>ClassName: BizProjectService</p>
@@ -71,5 +74,24 @@ public interface BizProjectService {
             String address, String description) throws Exception;
 
     void deletes(String ids);
+
+    Project getById(int projectId);
+
+    void addSaveDevice(int projectId, int deviceId, String entryIds, String installWorker, String position);
+
+    void updateSaveDevice(int projectDeviceId, int deviceId, String entryIds,
+            String installWorker, String position);
+
+    void deletesDevice(String ids);
+
+    void getCheckDetailsDataTablePage(DataTables dtJson, int projectDeviceId);
+
+    void getWorkerDataTablePage(DataTables dtJson, int projectId, int workerType);
+
+    JSONObject getCanAddToProjectWorker(int projectId, int workerType);
+
+    void addSaveWorker(int projectId, int workerType, int workerId, int projectDeviceId);
+
+    void deleteWorker(int projectWorkerId);
    
 }

@@ -143,4 +143,14 @@ public class ProjectDevice implements Serializable {
     public void setJSONArrayEntry(JSONArray checkEntryJSONArray){
         this.checkEntryJa = checkEntryJSONArray.toString();
     }
+    public void create(Project project2, Device device2, JSONArray entryJa,
+            String installWorker2, String position2) {
+        this.project = project2;
+        this.device = device2;
+        this.setJSONArrayEntry(entryJa);
+        this.installWorker = installWorker2;
+        this.createDate = new Date();
+        this.position = position2;
+        this.count = new CountVo();
+    }
 }

@@ -169,7 +169,7 @@ jQuery(document).ready(function(){
                 var content="";
                 content+="&nbsp;&nbsp;<a class='stdbtn' style='font-size: 12px;' href='admin/projectDeviceShow?projectId="+full.id+"' >设备</a>";
                 content+="&nbsp;&nbsp;<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='updateSave("+full.id+","+JSON.stringify(full)+",2)'>能源</a></br></br>";
-                content+="&nbsp;&nbsp;<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='updateSave("+full.id+","+JSON.stringify(full)+",2)'>团队</a>";
+                content+="&nbsp;&nbsp;<a class='stdbtn' style='font-size: 12px;' href='admin/projectWorkerShow?projectId="+full.id+"'>团队</a>";
                 content+="&nbsp;&nbsp;<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='updateSave("+full.id+","+JSON.stringify(full)+",2)'>报表</a></br></br>";
                 content+="&nbsp;&nbsp;<a class='stdbtn' style='font-size: 12px;' href='javascript:void(0);' onclick='updateSave("+full.id+","+JSON.stringify(full)+")'>编辑</a>";
                 return content;

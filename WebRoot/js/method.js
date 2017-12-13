@@ -740,3 +740,55 @@
                       jAlertErrorMsg("请求错误");
                   });
     }
+	
+	/**
+	 * 查看巡检项
+	 */
+	function lookCheckEntry(obj,flag){
+	       obj = eval('(' + obj+ ')');
+	       var html = " <ul class='toplist'>";
+	       for(var k=0;k<obj.length;k++){
+	       html+="<li>"+
+	           "<div>"+
+	               "<span class='three_fourth'>"+
+	                   "<span class='left'>"+
+	                       "<span class='title entry-span'>"+(k+1)+": "+obj[k].name+"</span>";
+	                      if(flag == 0){
+	                         html += "备注:<span class='desc'>"+obj[k].desc+"</span>";
+	                      }
+	                       
+	              html +="</span>"+
+	               "</span>";
+	               if(flag == 0){
+	              html +="<span class='one_fourth last'>"+
+	                   "<span class='right'><span class='h3'>";
+	                  html += "<div class='checker disabled'  id='uniform-undefined'>"+
+	                              "<span "+(obj[k].value ? "class='checked'" : "" )+" >"+
+	                              "<input name='check2' disabled='disabled' checked='checked' style='opacity: 0;' type='checkbox'>"+
+	                             "</span>"+
+	                           "</div>";
+	                  html += "</span></span>";
+	                 
+	               }
+	              html += "</div>"+
+	       "</li>";
+	       }
+	          html +=  "</ul>";
+	        jBmzAlert( html, "设备巡检项信息", function(r) {
+	        if (r) {
+	           return;
+	        }
+	        });
+	        jQuery("#popup_container").css({"width":"400px"});
+	        jQuery("#popup_content").css({"max-height":"900px"});
+	        jQuery("#popup_ok").css({"display":"none"});
+	        jQuery("#popup_cancel").val("关闭");
+	        jQuery(".chzn-select").chosen();
+	        jQuery("#popup_container").css({
+	        "margin-top" : "40px",
+	        "z-index" : "99996"
+	        });
+	        jQuery("#popup_overlay").css({
+	            "z-index" : "99995"
+	        });
+	   }

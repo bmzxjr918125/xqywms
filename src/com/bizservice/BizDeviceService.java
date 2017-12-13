@@ -4,6 +4,7 @@ import net.sf.json.JSONArray;
 
 import com.base.action.datatables.DataTables;
 import com.entity.admin.Admin;
+import com.entity.device.Device;
 import com.entity.device.DeviceCard;
 
 /**
@@ -65,7 +66,7 @@ public interface BizDeviceService {
      * <p>@date 2017-12-5下午12:58:29</p>
      */
     JSONArray getCardNameAndIdList();
-    DeviceCard getById(int cardId);
+    DeviceCard getCardById(int cardId);
     /**
      * <p>@Description: 添加设备信息</p>
      * <p>@param @param deviceCardId
@@ -106,6 +107,8 @@ public interface BizDeviceService {
      * <p>@date 2017-12-5下午5:34:04</p>
      */
     void deletes(String ids);
+    JSONArray getDeviceNameAndIdList(Boolean pDeviceIsNull, int index);
+    Device getById(int deviceId);
 
  
    

@@ -118,8 +118,11 @@ public class BizDeviceServiceImpl implements BizDeviceService{
        return JSONArray.fromObject(list);
    }
    
-
-   public DeviceCard getById(int cardId) {
+   public JSONArray getDeviceNameAndIdList(Boolean pDeviceIsNull, int status) {
+       List<String> list = deviceService.getDeviceNameAndIdList(pDeviceIsNull,status);
+       return JSONArray.fromObject(list);
+   }
+   public DeviceCard getCardById(int cardId) {
        DeviceCard deviceCard = deviceCardService.getById(cardId);
        if(deviceCard == null){
            throw new BizException("未找到对应设备名片信息");
@@ -261,6 +264,15 @@ public class BizDeviceServiceImpl implements BizDeviceService{
        
        
    }
+   public Device getById(int deviceId) {
+       Device device = deviceService.getById(deviceId);
+       if(device == null){
+            throw new BizException("未找到该设备信息");
+       }
+       return device;
+   }
+   
+   
    
     public DeviceCardService getDeviceCardService() {
         return deviceCardService;
